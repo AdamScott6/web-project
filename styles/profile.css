@@ -7,6 +7,121 @@ nav{
     height: 7vh;
 }
 
-#body{
-    padding-top: 7vh;
+div#navigation{
+    padding-top: 2vh;
+}
+
+table, button{
+    width: 100%;
+}
+
+#menu_list{
+    padding: 2vh;
+    height: 90%;
+}
+
+p#menu_header{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+p#settings_header{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.setting_label{
+    text-align: center;
+    width: 20%;
+}
+
+input.slider{
+    width: 100%;
+}
+
+div.dropdown{
+    width: 100%;
+}
+
+
+#logo {
+    width: 50px;
+}
+
+#profile_pic {
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    position: relative
+    z-index: 1;
+}
+
+.navbar {
+    background-color: black;
+}
+
+.navbar-item {
+    color: white;
+}
+
+.banner {
+    position: absolute;
+    top: 111px; /* height of banner */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 20%;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.text {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 70px;
+  position: relative;
+}
+
+.about-me {
+    margin-left: 50px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    background-color: #f5f5f5;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    width: 80%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.latest-posts {
+    margin-left: 50px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    background-color: #f5f5f5;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    width: 80%;
+    max-width: 450px;
+    text-align: center;
 }
