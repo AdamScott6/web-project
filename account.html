@@ -8,7 +8,31 @@
     <title>Account Page</title>
 </head>
 
-<body>
+<body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-dark has-shadow">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                Site Name
+            </a>
+        </div>
+        <div class="navbar-start">
+            <div class="divider">
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <img id="site_logo" src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8=" alt="Site Logo">
+            </div>
+        </div>
+    </nav>
+
+    <div id="navigation" class="tabs">
+        <ul>
+          <li><a>Home</a></li>
+          <li><a>Profile</a></li>
+          <li><a>Chats</a></li>
+          <li class="is-active"><a>Account</a></li>
+          <li><a>Settings</a></li>
+        </ul>
+    </div>
 
     <form id = "mainBody" action="login.html" class="center">
         <img src="lib/default.jpg" class="avatar">
