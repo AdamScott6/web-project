@@ -1,0 +1,12 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+
+nav{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    height: 7vh;
+}
+
+#body{
+    padding-top: 7vh;
+}
