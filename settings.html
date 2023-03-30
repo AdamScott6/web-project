@@ -1,0 +1,132 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="styles/settings.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
+        integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- <script type="text/javascript" src="scripts/chart.js"></script> -->
+</head>
+<body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-dark has-shadow">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                Site Name
+            </a>
+        </div>
+        <div class="navbar-start">
+            <div class="divider"
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <img id="site_logo" src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8=" alt="Site Logo">
+            </div>
+        </div>
+    </nav>
+
+    <div id="navigation" class="tabs">
+        <ul>
+          <li><a>Home</a></li>
+          <li><a>Profile</a></li>
+          <li><a>Chats</a></li>
+          <li><a>Account</a></li>
+          <li class="is-active"><a>Settings</a></li>
+        </ul>
+    </div>
+
+    <div id="menu_list" class="tile is-ancestor">
+        <div class="tile is-parent is-3">
+            <div id="settings_column" class="tile is-child box is-primary">
+                <p id="menu_header">Settings List</p>
+                <table class="menu-list">
+                    <tr>
+                        <td>
+                            <button class="button is-link is-outlined">Settings Group 1</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button is-link is-inverted">Settings Group 2</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button is-link is-inverted">Settings Group 3</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button is-link is-inverted">Settings Group 4</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button is-link is-inverted">Settings Group 5</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <div class="tile is-child box">
+                <p id="settings_header">Settings Group 1</p>
+                <table>
+                    <tr>
+                        <td class="setting_label">
+                            Setting 1 Name:
+                        </td>
+                        <td>
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="setting_label">
+                            Setting 2 Name:
+                        </td>
+                        <td>
+                            <div class="dropdown is-hoverable">
+                                <div class="dropdown-trigger">
+                                  <button id="dropdown_button" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                    <span>Option 1</span>
+                                    <span class="icon is-small">
+                                      <i class="fas fa-angle-down"></i>
+                                    </span>
+                                  </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                  <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                      Option 1
+                                    </a>
+                                    <a class="dropdown-item">
+                                      Option 2
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                      Option 3
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                      Option 4
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                      Option 5
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

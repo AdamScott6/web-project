@@ -1,0 +1,54 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+
+nav{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    height: 7vh;
+}
+
+div#navigation{
+    padding-top: 2vh;
+}
+
+table, button{
+    width: 100%;
+}
+
+#menu_list{
+    padding: 2vh;
+    height: 90%;
+}
+
+p#menu_header{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+p#settings_header{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.setting_label{
+    text-align: center;
+    width: 20%;
+}
+
+input.slider{
+    width: 100%;
+}
+
+div.dropdown{
+    width: 100%;
+}
