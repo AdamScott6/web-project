@@ -1,41 +1,44 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <!-- reference your stylesheet here -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="styles/profile.css">
-    <!-- reference your source code here -->
-
+    <link rel="stylesheet" href="styles/settings.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
+        integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script type="text/javascript" src="scripts/settings.js"></script>
 </head>
+<body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-dark has-shadow">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                Site Name
+            </a>
+        </div>
+        <div class="navbar-start">
+            <div class="divider">
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <img id="site_logo" src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8=" alt="Site Logo">
+            </div>
+        </div>
+    </nav>
 
-<body id="body" class="has-navbar-fixed-top">
-  <nav class="navbar is-fixed-top is-dark has-shadow">
-      <div class="navbar-brand">
-          <a class="navbar-item">
-              Site Name
-          </a>
-      </div>
-      <div class="navbar-start">
-          <div class="divider">
-      <div class="navbar-end">
-          <div class="navbar-item">
-              <img id="site_logo" src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8=" alt="Site Logo">
-          </div>
-      </div>
-  </nav>
-
-  <div id="navigation" class="tabs">
-      <ul>
-        <li id="homePage"><a href="home.html">Home</a></li>
-        <li id="profilePage" class="is-active"><a href="profile.html">Profile</a></li>
-        <li id="chatsPage"><a href="chats.html">Chats</a></li>
-        <li id="accountPage"><a href="login.html">Account</a></li>
-        <li id="settingsPage"><a href="settings.html">Settings</a></li>
-      </ul>
-  </div>
+    <div id="navigation" class="tabs">
+        <ul>
+            <li id="homePage"><a href="home.html">Home</a></li>
+            <li id="profilePage" class="is-active"><a href="profile.html">Profile</a></li>
+            <li id="chartsPage"><a href="charts.html">Chats</a></li>
+            <li id="accountPage"><a href="login.html">Account</a></li>
+            <li id="settingsPage"><a href="settings.html">Settings</a></li>
+          </ul>
+    </div>
 
     <div>
         <div class="banner">
@@ -66,4 +69,3 @@
 
 </body>
 </html>
-
