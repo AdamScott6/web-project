@@ -1,0 +1,37 @@
+form.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    width: 15vh;
+    height: auto;
+    margin: 25px;
+}
+
+#signOut {
+    background-color: red;
+    color: white;
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#changeUsernameButton,
+#changeProfilePictureButton,
+#changeEmailButton,
+#changePasswordButton {
+    background-color: grey;
+    color: white;
+    padding: 15px 0px;
+    width: 15vh;
+    border: none;
+    cursor: pointer;
+}
+
+#mainBody {
+    padding-top: 10vh;
+}

@@ -1,0 +1,35 @@
+form.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#email,
+#password {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid grey;
+}
+
+#loginButton {
+    background-color: green;
+    color: white;
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#createButton {
+    background-color: #0000c5;
+    color: white;
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#mainBody {
+    padding-top: 10vh;
+}
