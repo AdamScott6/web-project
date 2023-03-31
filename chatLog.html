@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Log</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="styles/chatlog.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/1bcec886ff.js" crossorigin="anonymous"></script>
+    <script src="scripts/chatLog.js" defer></script>
+
+</head>
+
+<body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-dark has-shadow">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                Site Name
+            </a>
+        </div>
+        <div class="navbar-start">
+            <div class="divider">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <img id="site_logo"
+                            src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8="
+                            alt="Site Logo">
+                    </div>
+                </div>
+    </nav>
+
+    <div id="navigation" class="tabs">
+        <ul>
+            <li id="homePage"><a href="home.html">Home</a></li>
+            <li id="profilePage" class="is-active"><a href="profile.html">Profile</a></li>
+            <li id="chatsPage"><a href="messagesCentre.html">Chats</a></li>
+            <li id="accountPage"><a href="login.html">Account</a></li>
+            <li id="settingsPage"><a href="settings.html">Settings</a></li>
+        </ul>
+    </div>
+
+    <div id="app">
+        <div class="card-container">
+            <div class="card-header">
+                <div class="img-avatar"></div>
+                <div class="text-chat">
+                    [Insert name (insert username)]
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="messages-container">
+                    <div class="message-box left">
+                        <p>Hello, How are you?</p>
+                    </div>
+                    <div class="message-box right">
+                        <p>Hi</p>
+                    </div>
+                </div>
+                <div class="message-input">
+                    <form>
+                        <textarea placeholder="Type your message here" class="message-send"></textarea>
+                        <button type="submit" class="button-send">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

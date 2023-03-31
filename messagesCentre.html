@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="styles/messagesCentre.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/1bcec886ff.js" crossorigin="anonymous"></script>
+    <script src="scripts/messagesCentre.js" defer></script>
+
+</head>
+
+<body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-dark has-shadow">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                Site Name
+            </a>
+        </div>
+        <div class="navbar-start">
+            <div class="divider">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <img id="site_logo"
+                            src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8="
+                            alt="Site Logo">
+                    </div>
+                </div>
+    </nav>
+
+    <div id="navigation" class="tabs">
+        <ul>
+            <li id="homePage"><a href="home.html">Home</a></li>
+            <li id="profilePage" class="is-active"><a href="profile.html">Profile</a></li>
+            <li id="chatsPage"><a href="messagesCentre.html">Chats</a></li>
+            <li id="accountPage"><a href="login.html">Account</a></li>
+            <li id="settingsPage"><a href="settings.html">Settings</a></li>
+        </ul>
+    </div>
+
+    <div id="topBar">
+        <p>Messages</p>
+        <i class="fa-solid fa-gear"></i>
+    </div>
+
+    <div class="searchBar">
+        <form class="form">
+            <label for="search">
+                <input required="" autocomplete="off" placeholder="search your chats" id="search" type="text">
+                <div class="icon">
+                    <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" class="swap-on">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linejoin="round"
+                            stroke-linecap="round"></path>
+                    </svg>
+                    <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" class="swap-off">
+                        <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linejoin="round" stroke-linecap="round"></path>
+                    </svg>
+                </div>
+                <button type="reset" class="close-btn">
+                    <svg viewBox="0 0 20 20" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            fill-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </label>
+        </form>
+    </div>
+    <br>
+
+    <div id="app">
+        <div class="card" v-for="(user, i) in userData" :key="i">
+            <img class="profilePic" :src="userData[i].pic" alt="profile picture" width="48" height="48">
+            <div class="textBox">
+                <div class="textContent">
+                    <p class="name">{{ user.name }} (@{{ user.username }})</p>
+                    <span class="time">[Insert] min ago</span>
+                </div>
+                <p class="lastMessage">[Insert last message here]</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
