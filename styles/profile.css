@@ -11,9 +11,6 @@ div#navigation{
     padding-top: 2vh;
 }
 
-table, button{
-    width: 100%;
-}
 
 #menu_list{
     padding: 2vh;
@@ -45,14 +42,6 @@ p#settings_header{
     width: 20%;
 }
 
-input.slider{
-    width: 100%;
-}
-
-div.dropdown{
-    width: 100%;
-}
-
 
 #logo {
     width: 50px;
@@ -76,7 +65,7 @@ div.dropdown{
 
 .banner {
     position: absolute;
-    top: 111px; /* height of banner */
+    top: 111px; /* banner height */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -101,27 +90,30 @@ div.dropdown{
 }
 
 .about-me {
-    margin-left: 50px;
-    margin-top: 70px;
+
     margin-bottom: 70px;
     background-color: #f5f5f5;
     padding: 50px;
-    border-radius: 5px;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
     width: 80%;
-    max-width: 450px;
     text-align: center;
 }
 
+.columns.is-centered {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+
+
 .latest-posts {
-    margin-left: 50px;
-    margin-top: 70px;
-    margin-bottom: 70px;
-    background-color: #f5f5f5;
-    padding: 50px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-    width: 80%;
-    max-width: 450px;
-    text-align: center;
+  width: 180%;
+  margin-left: -100px;
+}
+
+.add-post {
+  float: right;
+  margin-top: 300px;
+  margin-right: 50px;
+
 }
