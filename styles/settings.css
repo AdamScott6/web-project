@@ -79,6 +79,10 @@ div#visibility_radio {
     padding-top: 10px;
 }
 
+label.radio {
+    color: var(--foreground);
+}
+
 #selectedOption{
     background-color: gray;
     color: white;
