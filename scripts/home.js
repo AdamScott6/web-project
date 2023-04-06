@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
 // This code was adapted from "app.js" by Beyond Fireship (2023-04-05)
+// let page = $("div.page").children();
 const observer = new IntersectionObserver((entries => {
     entries.forEach((entry) => {
         console.log(entry)
