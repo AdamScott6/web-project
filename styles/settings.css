@@ -1,5 +1,15 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
 
+:root {
+    --foreground: white;
+    --background: gray;
+    --light-background: gray;
+    /* --foreground: white; */
+    /* --background: hsl(0, 0%, 21%); */
+    /* --light-backgroud: hsl(0, 0%, 29%); */
+    --tile-background: gray;
+}
+
 nav{
     border-style: solid;
     border-color: black;
@@ -7,8 +17,14 @@ nav{
     height: 7vh;
 }
 
-#body{
+body#body {
     padding-top: 7vh;
+    /* background-color: var(--background); */
+}
+
+div.light-background {
+    padding-top: 7vh;
+    background-color: var(--tile-background);
 }
 
 table, button{
@@ -17,10 +33,11 @@ table, button{
 
 #menu_list{
     padding: 2vh;
-    height: 90%;
+    height: 93%;
 }
 
 p#menu_header{
+    color: var(--foreground);
     text-align: center;
     font-weight: bold;
     font-size: large;
@@ -31,6 +48,7 @@ p#menu_header{
 }
 
 p#settings_header{
+    color: var(--foreground);
     text-align: center;
     font-weight: bold;
     font-size: large;
@@ -40,15 +58,28 @@ p#settings_header{
     margin-bottom: 20px;
 }
 
-.setting_label{
+td#setting_label{
+    padding: 10px;
     text-align: center;
     width: 20%;
+    border-radius: 15px;
+    box-shadow: 0 0 3px #ddd;
+    color: var(--foreground);
+    background-color: var(--light-background);
 }
 
-input.slider{
+div#dropdown_button{
+    padding-left: 20px;
+    height: 100%;
     width: 100%;
 }
 
-div.dropdown{
-    width: 100%;
+div#visibility_radio {
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+#selectedOption{
+    background-color: gray;
+    color: white;
 }

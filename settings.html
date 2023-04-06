@@ -15,7 +15,7 @@
     <script type="text/javascript" src="scripts/settings.js"></script>
 </head>
 <body id="body" class="has-navbar-fixed-top">
-    <nav class="navbar is-fixed-top is-dark has-shadow">
+    <nav class="navbar is-fixed-top is-black has-shadow">
         <div class="navbar-brand">
             <a class="navbar-item">
                 Site Name
@@ -30,7 +30,7 @@
         </div>
     </nav>
 
-    <div id="navigation" class="tabs">
+    <div id="navigation" class="tabs is-black">
         <ul>
             <li id="homePage"><a href="home.html">Home</a></li>
             <li id="profilePage"><a href="profile.html">Profile</a></li>
@@ -42,85 +42,37 @@
 
     <div id="menu_list" class="tile is-ancestor">
         <div class="tile is-parent is-3">
-            <div id="settings_column" class="tile is-child box is-primary">
+            <div class="tile is-child box light-background">
                 <p id="menu_header">Settings List</p>
-                <table class="menu-list">
+                <table id="settings_column" class="menu-list">
                     <tr>
                         <td>
-                            <button class="button is-link is-outlined">Settings Group 1</button>
+                            <button id="appearance_button" class="button is-light has-text-grey-lighter has-background-grey is-outlined" onclick="updateSettingsMenu(0)">Appearance</button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button class="button is-link is-inverted">Settings Group 2</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="button is-link is-inverted">Settings Group 3</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="button is-link is-inverted">Settings Group 4</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="button is-link is-inverted">Settings Group 5</button>
+                            <button id="privacy_button" class="button is-light has-text-grey-lighter has-background-grey" onclick="updateSettingsMenu(1)">Privacy</button>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="tile is-parent">
-            <div class="tile is-child box">
-                <p id="settings_header">Settings Group 1</p>
-                <table>
-                    <tr>
-                        <td class="setting_label">
-                            Setting 1 Name:
-                        </td>
-                        <td>
-                            <div class="slidecontainer">
-                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="setting_label">
-                            Setting 2 Name:
-                        </td>
+            <div class="tile is-child box light-background">
+                <p id="settings_header">Appearance</p>
+                <table class="background">
+                    <tr id="settings_body">
+                        <td id="setting_label"></td>
                         <td>
                             <div class="dropdown is-hoverable">
-                                <div class="dropdown-trigger">
-                                  <button id="dropdown_button" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                    <span>Option 1</span>
-                                    <span class="icon is-small">
-                                      <i class="fas fa-angle-down"></i>
-                                    </span>
-                                  </button>
+                                <div id="dropdown_button" class="dropdown-trigger">
+                                    <button id="dropdown_label" class="button"></button>
                                 </div>
-                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                  <div class="dropdown-content">
-                                    <a href="#" class="dropdown-item">
-                                      Option 1
-                                    </a>
-                                    <a class="dropdown-item">
-                                      Option 2
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                      Option 3
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                      Option 4
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                      Option 5
-                                    </a>
-                                  </div>
+                                <div class="dropdown-menu" role="menu">
+                                    <div id="dropdown_menu" class="dropdown-content"></div>
                                 </div>
-                              </div>
+                            </div>
                         </td>
                     </tr>
                 </table>
