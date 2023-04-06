@@ -1,12 +1,12 @@
-nav {
+nav{
     border-style: solid;
     border-color: black;
     border-width: 1px;
     height: 7vh;
 }
 
-div#navigation {
-    padding-top: 2vh;
+#body{
+    padding-top: 7vh;
 }
 
 .form {

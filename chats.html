@@ -8,14 +8,14 @@
     <title>Messages</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="styles/messagesCentre.css">
+    <link rel="stylesheet" href="styles/chats.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://kit.fontawesome.com/1bcec886ff.js" crossorigin="anonymous"></script>
-    <script src="scripts/messagesCentre.js" defer></script>
+    <script src="scripts/chats.js" defer></script>
 
 </head>
 
-<body class="has-navbar-fixed-top">
+<body id="body" class="has-navbar-fixed-top">
     <nav class="navbar is-fixed-top is-dark has-shadow">
         <div class="navbar-brand">
             <a class="navbar-item">
@@ -36,8 +36,8 @@
     <div id="navigation" class="tabs">
         <ul>
             <li id="homePage"><a href="home.html">Home</a></li>
-            <li id="profilePage" class="is-active"><a href="profile.html">Profile</a></li>
-            <li id="chatsPage"><a href="messagesCentre.html">Chats</a></li>
+            <li id="profilePage"><a href="profile.html">Profile</a></li>
+            <li id="chatsPage" class="is-active"><a href="chats.html">Chats</a></li>
             <li id="accountPage"><a href="login.html">Account</a></li>
             <li id="settingsPage"><a href="settings.html">Settings</a></li>
         </ul>

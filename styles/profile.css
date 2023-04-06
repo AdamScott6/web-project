@@ -7,10 +7,9 @@ nav{
     height: 7vh;
 }
 
-div#navigation{
-    padding-top: 2vh;
+#body{
+    padding-top: 7vh;
 }
-
 
 #menu_list{
     padding: 2vh;
@@ -52,20 +51,20 @@ p#settings_header{
     height: 300px;
     padding: 20px;
     position: relative
-    z-index: 1;
+    /* z-index: 1; */
 }
 
-.navbar {
+/* .navbar {
     background-color: black;
 }
 
 .navbar-item {
     color: white;
-}
+} */
 
 .banner {
     position: absolute;
-    top: 111px; /* banner height */
+    top: 11vh; /* banner height */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
