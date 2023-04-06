@@ -28,11 +28,11 @@ nav{
     border-color: black;
     border-width: 1px;
 }
-#navbar-item{
-    align-self: flex-start;
 
+#body{
+    padding-top: 7vh;
 }
-navb{
+/* navb{
     padding-top: 7px;
     height: fit-content;
     border-style: solid;
@@ -44,7 +44,7 @@ body{
     color: white;
     font-family: 'Poppins', sans-serif;
     margin: 0;
-}
+} */
 .page{
     background-color: #690000;
 }
