@@ -14,7 +14,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script type="text/javascript" src="scripts/profile.js"></script>
 </head>
-<body id="body" class="has-navbar-fixed-top">
+<body class="has-navbar-fixed-top">
     <nav class="navbar is-fixed-top is-dark has-shadow">
         <div class="navbar-brand">
             <a class="navbar-item">
@@ -32,31 +32,31 @@
 
     <div id="navigation" class="tabs">
         <ul>
-          <li id="homePage"><a href="home.html">Home</a></li>
-          <li id="profilePage" class="is-active"><a href="profile.html">Profile</a></li>
-          <li id="chatsPage"><a href="chats.html">Chats</a></li>
-          <li id="accountPage"><a href="login.html">Account</a></li>
-          <li id="settingsPage"><a href="settings.html">Settings</a></li>
-        </ul>
+            <li id="homePage"><a href="home.html">Home</a></li>
+            <li id="profilePage" class="is-active"><a href="profile.html">Profile</a></li>
+            <li id="chatsPage"><a href="chats.html">Chats</a></li>
+            <li id="accountPage"><a href="login.html">Account</a></li>
+            <li id="settingsPage"><a href="settings.html">Settings</a></li>
+          </ul>
     </div>
 
 
 
     <div>
         <div class="banner">
-            Banner
+            <img src="images/pfp.svg" id="banner_image">
+            <input type="file" accept="image/*" onchange="changeBannerImage(event)">
         </div>
 
-        <img src="images/pfp.svg" id="profile_pic">
 
-<!-- ----------------------------------- -->
 
-        <div class="add-post">
-            <a class="button is-dark">
-              Add New Post +
-            </a>
+
+        <div class="profile-pic-container">
+              <img src="images/pfp.svg" id="profile_pic">
+              <input type="file" accept="image/*" onchange="changeimage(event)">
         </div>
-<!-- ----------------------------------- -->
+
+
 
         <div class="text">
             Name <br>
@@ -65,6 +65,11 @@
 
     </div>
 
+        <div class="add-post">
+            <a class="button is-dark">
+              Add New Post +
+            </a>
+        </div>
 
 <br>
 
