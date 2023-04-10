@@ -2,12 +2,10 @@
 
 :root {
     --foreground: white;
-    --background: gray;
-    --light-background: gray;
-    /* --foreground: white; */
-    /* --background: hsl(0, 0%, 21%); */
-    /* --light-backgroud: hsl(0, 0%, 29%); */
+    --dark-background: rgb(77, 77, 77);
+    --light-background: white;
     --tile-background: gray;
+    --text-color: gray;
 }
 
 nav{
@@ -17,9 +15,30 @@ nav{
     height: 7vh;
 }
 
-body#body {
+div#navigation {
+    color: white;
+    background-color: hsl(0, 0%, 21%);
+    
+}
+
+a.page_label {
+    color: white;
+    
+}
+
+a.page_label:hover {
+    color: var(--text-color);
+    background-color: white;
+}
+
+body.body-light {
     padding-top: 7vh;
-    /* background-color: var(--background); */
+    background-color: var(--light-background);
+}
+
+body.body-dark {
+    padding-top: 7vh;
+    background-color: var(--dark-background);
 }
 
 div.light-background {
@@ -64,7 +83,7 @@ td#setting_label{
     width: 20%;
     border-radius: 15px;
     box-shadow: 0 0 3px #ddd;
-    color: var(--foreground);
+    color: var(--text-color);
     background-color: var(--light-background);
 }
 

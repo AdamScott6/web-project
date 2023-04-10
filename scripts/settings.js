@@ -7,8 +7,25 @@ let currentPageTitle = "Appearance";
 let menuButtons = []
 
 $(document).ready(function () {
+    initializeTheme();
     initializeSettings();
 });
+
+function initializeTheme(){
+    if (settings["theme"] === "Light"){
+        console.log($("body").attr("class"))
+        if ($("body").attr("class").includes("body-dark")){
+            $("body").removeClass("body-dark")
+        }
+        $("body").addClass("body-light")
+    }
+    else {
+        if ($("body").attr("class").includes("body-light")){
+            $("body").removeClass("body-light")
+        }
+        $("body").addClass("body-dark")
+    }
+}
 
 function initializeSettings(){
     menuButtons = [$("button#appearance_button"), $("button#privacy_button")];
@@ -54,6 +71,7 @@ function initializeAppearance(){
             }
         }
         updateDatabase();
+        initializeTheme();
     });
 }
 
