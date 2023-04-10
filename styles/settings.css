@@ -1,11 +1,18 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
 
 :root {
-    --foreground: white;
+    --page-label-color: gray;
+
     --dark-background: rgb(77, 77, 77);
     --light-background: white;
-    --tile-background: gray;
-    --text-color: gray;
+
+    --foreground-light: black;
+    --tile-background-light: white;
+    --text-color-light: black;
+
+    --foreground-dark: white;
+    --tile-background-dark: gray;
+    --text-color-dark: white;
 }
 
 nav{
@@ -27,7 +34,7 @@ a.page_label {
 }
 
 a.page_label:hover {
-    color: var(--text-color);
+    color: var(--page-label-color);
     background-color: white;
 }
 
@@ -41,9 +48,14 @@ body.body-dark {
     background-color: var(--dark-background);
 }
 
+div.dark-background {
+    padding-top: 7vh;
+    background-color: var(--tile-background-dark);
+}
+
 div.light-background {
     padding-top: 7vh;
-    background-color: var(--tile-background);
+    background-color: var(--tile-background-light);
 }
 
 table, button{
@@ -55,8 +67,8 @@ table, button{
     height: 93%;
 }
 
-p#menu_header{
-    color: var(--foreground);
+p.menu_header_light{
+    color: var(--foreground-light);
     text-align: center;
     font-weight: bold;
     font-size: large;
@@ -66,8 +78,19 @@ p#menu_header{
     margin-bottom: 10px;
 }
 
-p#settings_header{
-    color: var(--foreground);
+p.menu_header_dark{
+    color: var(--foreground-dark);
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+p.settings_header_light{
+    color: var(--foreground-light);
     text-align: center;
     font-weight: bold;
     font-size: large;
@@ -77,14 +100,39 @@ p#settings_header{
     margin-bottom: 20px;
 }
 
-td#setting_label{
+p.settings_header_dark{
+    color: var(--foreground-dark);
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+td.setting_label_light{
+    padding: 10px;
+    text-align: center;
+    width: 20%;
+    border-radius: 15px;
+    box-shadow: 0 0 3px black;
+    color: var(--text-color-light);
+    background-color: var(--light-background);
+}
+
+td.setting_label_dark{
     padding: 10px;
     text-align: center;
     width: 20%;
     border-radius: 15px;
     box-shadow: 0 0 3px #ddd;
-    color: var(--text-color);
-    background-color: var(--light-background);
+    color: var(--text-color-dark);
+    background-color: var(--dark-background);
+}
+
+div#setting_label_text{
+    text-align: center;
 }
 
 div#dropdown_button{
@@ -98,11 +146,15 @@ div#visibility_radio {
     padding-top: 10px;
 }
 
-label.radio {
-    color: var(--foreground);
+label.radio-light {
+    color: var(--foreground-light);
+}
+
+label.radio-dark {
+    color: var(--foreground-dark);
 }
 
 #selectedOption{
-    background-color: gray;
+    background-color: black;
     color: white;
 }

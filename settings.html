@@ -41,24 +41,24 @@
 
     <div id="menu_list" class="tile is-ancestor">
         <div class="tile is-parent is-3">
-            <div class="tile is-child box light-background">
+            <div id="settings_list_container" class="tile is-child box">
                 <p id="menu_header">Settings List</p>
                 <table id="settings_column" class="menu-list">
                     <tr>
                         <td>
-                            <button id="appearance_button" class="button is-light has-text-grey-lighter has-background-grey is-outlined" onclick="updateSettingsMenu(0)">Appearance</button>
+                            <button id="appearance_button" class="button is-light has-text-white has-background-info-dark" onclick="updateSettingsMenu(0)">Appearance</button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <button id="privacy_button" class="button is-light has-text-grey-lighter has-background-grey" onclick="updateSettingsMenu(1)">Privacy</button>
+                            <button id="privacy_button" class="button is-light has-text-black has-background-info-light" onclick="updateSettingsMenu(1)">Privacy</button>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="tile is-parent">
-            <div class="tile is-child box light-background">
+            <div id="settings_option_container" class="tile is-child box">
                 <p id="settings_header">Appearance</p>
                 <table class="background">
                     <tr id="settings_body">

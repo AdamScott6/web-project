@@ -1,29 +1,103 @@
 let settings = {
-    "theme": "Dark",
+    "theme": "Light",
     "visibility": "Private"
 }
 
 let currentPageTitle = "Appearance";
 let menuButtons = []
+let selectedMenuOption = 0;
 
 $(document).ready(function () {
-    initializeTheme();
     initializeSettings();
+    initializeTheme();
 });
 
 function initializeTheme(){
     if (settings["theme"] === "Light"){
-        console.log($("body").attr("class"))
+        // Background behind the tiles
         if ($("body").attr("class").includes("body-dark")){
-            $("body").removeClass("body-dark")
+            $("body").removeClass("body-dark");
         }
-        $("body").addClass("body-light")
+        $("body").addClass("body-light");
+
+        // Background of the tiles
+        if ($("div#settings_list_container").attr("class").includes("dark-background")){
+            $("div#settings_list_container").removeClass("dark-background");
+        }
+        $("div#settings_list_container").addClass("light-background");
+        if ($("div#settings_option_container").attr("class").includes("dark-background")){
+            $("div#settings_option_container").removeClass("dark-background");
+        }
+        $("div#settings_option_container").addClass("light-background");
+
+        // Menu header
+        if ($("p#menu_header").attr("class") == undefined || $("p#menu_header").attr("class").includes("menu_header_dark")){
+            $("p#menu_header").removeClass("menu_header_dark");
+        }
+        $("p#menu_header").addClass("menu_header_light");
+
+        // Settings header
+        if ($("p#settings_header").attr("class") == undefined || $("p#settings_header").attr("class").includes("settings_header_dark")){
+            $("p#settings_header").removeClass("settings_header_dark");
+        }
+        $("p#settings_header").addClass("settings_header_light");
+
+        // Colour of the label for each setting
+        if ($("td#setting_label").attr("class") == undefined || $("td#setting_label").attr("class").includes("setting_label_dark")){
+            $("td#setting_label").removeClass("setting_label_dark");
+        }
+        $("td#setting_label").addClass("setting_label_light");
+
+        // Radio button
+        for (radio of $("label.radio")){
+            if (radio.classList.contains("radio-dark")){
+                radio.classList.remove("radio-dark");
+            }
+            radio.classList.add("radio-light");
+        }
     }
     else {
+        // Background behind the tiles
         if ($("body").attr("class").includes("body-light")){
-            $("body").removeClass("body-light")
+            $("body").removeClass("body-light");
         }
-        $("body").addClass("body-dark")
+        $("body").addClass("body-dark");
+
+        // Background of the tiles
+        if ($("div#settings_list_container").attr("class").includes("light-background")){
+            $("div#settings_list_container").removeClass("light-background");
+        }
+        $("div#settings_list_container").addClass("dark-background");
+        if ($("div#settings_option_container").attr("class").includes("light-background")){
+            $("div#settings_option_container").removeClass("light-background");
+        }
+        $("div#settings_option_container").addClass("dark-background");
+        
+        // Menu header
+        if ($("p#menu_header").attr("class") == undefined || $("p#menu_header").attr("class").includes("menu_header_light")){
+            $("p#menu_header").removeClass("menu_header_light");
+        }
+        $("p#menu_header").addClass("menu_header_dark");
+
+        // Settings header
+        if ($("p#settings_header").attr("class") == undefined || $("p#settings_header").attr("class").includes("settings_header_light")){
+            $("p#settings_header").removeClass("settings_header_light");
+        }
+        $("p#settings_header").addClass("settings_header_dark");
+
+        // Colour of the label for each setting
+        if ($("td#setting_label").attr("class") == undefined || $("td#setting_label").attr("class").includes("setting_label_light")){
+            $("td#setting_label").removeClass("setting_label_light");
+        }
+        $("td#setting_label").addClass("setting_label_dark");
+
+        // Radio button
+        for (radio of $("label.radio")){
+            if (radio.classList.contains("radio-light")){
+                radio.classList.remove("radio-light");
+            }
+            radio.classList.add("radio-dark");
+        }
     }
 }
 
@@ -35,7 +109,7 @@ function initializeSettings(){
 function initializeAppearance(){
     // Theme label
     let settingLabel = $("td#setting_label");
-    settingLabel.append("<div class=\"container\">Theme</div>")
+    settingLabel.append("<div id=\"setting_label_text\" class=\"container\">Theme</div>")
 
     // Theme dropdown menu initialization
     let dropdownLabel = $("button#dropdown_label");
@@ -48,6 +122,7 @@ function initializeAppearance(){
 
     let dropdownMenu = $("div#dropdown_menu");
     dropdownOptions = "<a class=\"dropdown-item\"";
+    
     if (settings["theme"] === "Light"){
         dropdownOptions += "id=\"selectedOption\"";
     }
@@ -55,6 +130,7 @@ function initializeAppearance(){
     if (settings["theme"] === "Dark"){
         dropdownOptions += "id=\"selectedOption\"";
     }
+    
     dropdownOptions += ">Dark</a>";
     dropdownMenu.append(dropdownOptions);
 
@@ -70,15 +146,18 @@ function initializeAppearance(){
                 child.id = "";
             }
         }
+        updateSettingsMenu(selectedMenuOption);
         updateDatabase();
         initializeTheme();
     });
+    updateDatabase();
+    initializeTheme();
 }
 
 function initializePrivacy(){
     let settingLabel = $("td#setting_label");
     settingLabel.empty();
-    settingLabel.append("<div class=\"container\">Visibility</div>")
+    settingLabel.append("<div id=\"setting_label_text\" class=\"container\">Visibility</div>")
 
     let radio = $("div#visibility_radio");
     radio.empty();
@@ -100,7 +179,11 @@ function initializePrivacy(){
 
     $("input.radio_option").click(function(){
         updateVisiblity($(this).attr("answer"));
+        updateDatabase();
+        initializeTheme();
     });
+    updateDatabase();
+    initializeTheme();
 }
 
 function updateVisiblity(visibility){
@@ -109,13 +192,24 @@ function updateVisiblity(visibility){
 }
 
 function updateSettingsMenu(index){
+    selectedMenuOption = index;
     currentPageTitle = menuButtons[index].html();
     for (buttonIndex in menuButtons){
-        if (buttonIndex != index){
-            menuButtons[buttonIndex].attr("class", "button is-light has-text-grey-lighter has-background-grey")
+        if (settings["theme"] == "Dark"){
+            if (buttonIndex != index){
+                menuButtons[buttonIndex].attr("class", "button is-light has-text-grey-lighter has-background-grey")
+            }
+            else{
+                menuButtons[buttonIndex].attr("class", "button is-light has-text-grey-lighter has-background-grey is-outlined")
+            }
         }
         else{
-            menuButtons[buttonIndex].attr("class", "button is-light has-text-grey-lighter has-background-grey is-outlined")
+            if (buttonIndex != index){
+                menuButtons[buttonIndex].attr("class", "button is-light has-text-black has-background-info-light")
+            }
+            else{
+                menuButtons[buttonIndex].attr("class", "button is-light has-text-white has-background-info-dark")
+            }
         }
     }
     updateSettingsList();
