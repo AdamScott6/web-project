@@ -8,7 +8,6 @@ nav{
 }
 
 div#navigation {
-  padding-top: 17px;
   background-color: hsl(0, 0%, 21%);
 }
 
@@ -19,6 +18,10 @@ a.page_label {
 a.page_label:hover {
   color: gray;
   background-color: white;
+}
+
+#body{
+  padding-top: 7vh;
 }
 
 #menu_list{
@@ -60,7 +63,7 @@ p#settings_header{
     width: 300px;
     height: 300px;
     padding: 20px;
-    position: relative
+    position: relative;
     z-index: 1;
 }
 
