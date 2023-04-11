@@ -1,8 +1,6 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
 
 :root {
-    --page-label-color: gray;
-
     --dark-background: rgb(77, 77, 77);
     --light-background: white;
 
@@ -23,18 +21,15 @@ nav{
 }
 
 div#navigation {
-    color: white;
     background-color: hsl(0, 0%, 21%);
-    
 }
 
 a.page_label {
     color: white;
-    
 }
 
 a.page_label:hover {
-    color: var(--page-label-color);
+    color: gray;
     background-color: white;
 }
 

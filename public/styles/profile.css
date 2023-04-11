@@ -7,10 +7,19 @@ nav{
     height: 7vh;
 }
 
-div#navigation{
-    padding-top: 2vh;
+div#navigation {
+  padding-top: 17px;
+  background-color: hsl(0, 0%, 21%);
 }
 
+a.page_label {
+  color: white;
+}
+
+a.page_label:hover {
+  color: gray;
+  background-color: white;
+}
 
 #menu_list{
     padding: 2vh;
