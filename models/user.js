@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Post = require("./models/post");
 
 const userSchema = new Schema(
   {
@@ -28,12 +27,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    posts: [
-      {
-        type: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
-        required: false,
-      },
-    ],
+    // posts: [
+    //   {
+    //     type: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
+    //     required: false,
+    //   },
+    // ],
   },
   { timestamps: true }
 );
