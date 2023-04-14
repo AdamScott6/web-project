@@ -24,7 +24,7 @@ mongoose
 
 // Setup a static server for all files in /public
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true })); 
 
 // routes
 // Serve main.html as the default page
@@ -36,3 +36,17 @@ app.get("/", (req, res) => {
 app.get("/home.html", (req, res) => {
   res.sendFile(__dirname + "/home.html");
 });
+
+// User routes
+// GET call for current user (hardcoded user)
+app.get('/current-user', (req, res) => {
+  User.findById("64399fc89865cf45fed85888")
+    .then((result) => {
+      console.log(result)
+      res.send(result);
+    })
+    .catch((error) => {
+      res.status(500).send('Internal server error');
+    });
+})
+

@@ -30,7 +30,6 @@ const userSchema = new Schema(
     // posts: [
     //   {
     //     type: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
-    //     required: false,
     //   },
     // ],
   },
