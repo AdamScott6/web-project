@@ -4,13 +4,13 @@
     opacity: 0;
     filter: blur(5px);
     transform: translateX(-100%);
-    transition: all 1s;
+    transition: all 0.5s;
 }
 section:nth-child(even).hidden {
     opacity: 0;
     filter: blur(5px);
     transform: translateX(+100%);
-    transition: all 1s;
+    transition: all 0.5s;
 }
 section:nth-child(even).show, .show{
     opacity: 1;
@@ -45,19 +45,6 @@ a.page_label:hover {
 #body{
     padding-top: 7vh;
 }
-/* navb{
-    padding-top: 7px;
-    height: fit-content;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
-}
-body{
-    padding-top: 7vh;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-} */
 .page{
     background-color: #690000;
 }
@@ -117,9 +104,3 @@ section:nth-child(odd) .header {
 
 }
 /* -------------Post------------- */
-
-
-end{
-
-}
-
