@@ -83,15 +83,26 @@ app.get("/settings-data", async (req, res) => {
   }
 });
 
-//------------------------
-// updating profile settings for settings.html
-app.post("/settings-update", (req, res) => {
-  // console.log(res);
-  // console.log(req.body);
+// updating theme
+app.post("/settings-updatetheme", (req, res) => {
   try {
-    User.updateOne({username: req.body.username}).then((result) => {
-      result.isLightMode = req.body.isLightMode;
-      result.accountIsPrivate = req.body.accountIsPrivate;
+    console.log(req.body.isLightMode)
+    User.findByIdAndUpdate(req.body.id, {isLightMode: req.body.isLightMode})
+    .then(() => {
+      // console.log(User.findById(req.body.id));
+    })
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+})
+
+// updating privacy
+app.post("/settings-updateprivacy", (req, res) => {
+  try {
+    User.findByIdAndUpdate(req.body.id, {accountIsPrivate: req.body.accountIsPrivate})
+    .then(() => {
+      // console.log(User.findById(req.body.id));
     })
   } catch (err) {
     console.log(err);

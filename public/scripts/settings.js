@@ -6,13 +6,16 @@ let settings = {
 let currentPageTitle = "Appearance";
 let menuButtons = []
 let selectedMenuOption = 0;
-let username = "";
+let id = "";
+let themeChanged = false;
+let privacyChanged = false;
 
 $(document).ready(function () {
     $.get("/settings-data", (data) => {
+        console.log(data)
         console.log(data[3]);
-        // settings["isLight"] = data[3].isLightMode;
-        username = data[3].username;
+        id = data[3]._id;
+        settings["isLight"] = data[3].isLightMode;
         settings["isPrivate"] = data[3].accountIsPrivate;
     }).then((result) => {
         menuButtons = [$("button#appearance_button"), $("button#privacy_button")];
@@ -148,10 +151,16 @@ function initializeAppearance(){
 
     $("a.dropdown-item").click(function(){
         if (this.text === "Light"){
-            settings["isLight"] = true;
+            if (!(settings["isLight"])){
+                themeChanged = true;
+                settings["isLight"] = true;
+            }
         }
         else{
-            settings["isLight"] = false;
+            if (settings["isLight"]){
+                themeChanged = true;
+                settings["isLight"] = false;
+            }
         }
         dropdownLabel.children("div").html(this.text + "&nbsp;&nbsp;");
 
@@ -164,7 +173,7 @@ function initializeAppearance(){
             }
         }
         updateSettingsMenu(selectedMenuOption);
-        updateDatabase();
+        updateDatabase(0);
         initializeTheme();
     });
     initializeTheme();
@@ -195,7 +204,7 @@ function initializePrivacy(){
 
     $("input.radio_option").click(function(){
         updateVisiblity($(this).attr("answer"));
-        updateDatabase();
+        updateDatabase(1);
         initializeTheme();
     });
     initializeTheme();
@@ -208,6 +217,7 @@ function updateVisiblity(visibility){
     else {
         settings["isPrivate"] = false;
     }
+    privacyChanged = true;
     initializePrivacy();
 }
 
@@ -264,8 +274,14 @@ function updateSettingsList(){
     }
 }
 
-function updateDatabase(){
-    // CODE TO WRITE CHANGED SETTINGS TO DATABASE
-    // $.post("/settings-update", {isLightMode: settings["isLight"], accountIsPrivate: settings["isPrivate"]});
-    $.post("/settings-update", {username: username, isLightMode: settings["isLight"], accountIsPrivate: settings["isPrivate"]});
+function updateDatabase(option){
+    console.log(themeChanged);
+    if (option === 0 && themeChanged){
+        $.post("/settings-updatetheme", {id: id, isLightMode: settings["isLight"]});
+        themeChanged = false;
+    }
+    else if (option === 1 && privacyChanged){
+        $.post("/settings-updateprivacy", {id: id, accountIsPrivate: settings["isPrivate"]});
+        themeChanged = false;
+    }
 }
