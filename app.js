@@ -78,14 +78,23 @@ app.get("/settings-data", async (req, res) => {
     const profileData = await User.find({});
     res.json(profileData);
   } catch (err) {
-    // console.log(profileData);
     console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
 });
 
-// app.post("/settings-update", (req, res) => {
-//   var post = new Post(
-
-//   )
-// })
+//------------------------
+// updating profile settings for settings.html
+app.post("/settings-update", (req, res) => {
+  // console.log(res);
+  // console.log(req.body);
+  try {
+    User.updateOne({username: req.body.username}).then((result) => {
+      result.isLightMode = req.body.isLightMode;
+      result.accountIsPrivate = req.body.accountIsPrivate;
+    })
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+})

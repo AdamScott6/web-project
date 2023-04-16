@@ -1,24 +1,29 @@
 let settings = {
-    "theme": "Light",
+    "isLight": false,
     "isPrivate": true
 }
 
 let currentPageTitle = "Appearance";
 let menuButtons = []
 let selectedMenuOption = 0;
+let username = "";
 
 $(document).ready(function () {
     $.get("/settings-data", (data) => {
-        console.log(data);
-        settings["isPrivate"] = data[3].accountIsPrivate
+        console.log(data[3]);
+        // settings["isLight"] = data[3].isLightMode;
+        username = data[3].username;
+        settings["isPrivate"] = data[3].accountIsPrivate;
+    }).then((result) => {
+        menuButtons = [$("button#appearance_button"), $("button#privacy_button")];
+        initializeAppearance();
+        updateSettingsMenu(0);
+        initializeTheme();
     });
-
-    initializeSettings();
-    initializeTheme();
 });
 
 function initializeTheme(){
-    if (settings["theme"] === "Light"){
+    if (settings["isLight"] === true){
         // Background behind the tiles
         if ($("body").attr("class").includes("body-dark")){
             $("body").removeClass("body-dark");
@@ -106,11 +111,6 @@ function initializeTheme(){
     }
 }
 
-function initializeSettings(){
-    menuButtons = [$("button#appearance_button"), $("button#privacy_button")];
-    initializeAppearance();
-}
-
 function initializeAppearance(){
     // Theme label
     let settingLabel = $("td#setting_label");
@@ -119,7 +119,7 @@ function initializeAppearance(){
     // Theme dropdown menu initialization
     let dropdownLabel = $("button#dropdown_label");
     dropdownLabel.append(
-        "<div>" + settings["theme"] + "&nbsp;&nbsp;</div>" +
+        "<div>Light&nbsp;&nbsp;</div>" +
         "<span class=\"icon is-small\">" + 
         "<i id=\"arrow\" class=\"fas fa-angle-down\"></i>" +
         "</span>"
@@ -128,11 +128,11 @@ function initializeAppearance(){
     let dropdownMenu = $("div#dropdown_menu");
     dropdownOptions = "<a class=\"dropdown-item\"";
     
-    if (settings["theme"] === "Light"){
+    if (settings["isLight"] === true){
         dropdownOptions += "id=\"selectedOption\"";
     }
     dropdownOptions += ">Light</a><a class=\"dropdown-item\"";
-    if (settings["theme"] === "Dark"){
+    if (settings["isLight"] === false){
         dropdownOptions += "id=\"selectedOption\"";
     }
     
@@ -140,7 +140,12 @@ function initializeAppearance(){
     dropdownMenu.append(dropdownOptions);
 
     $("a.dropdown-item").click(function(){
-        settings["theme"] = this.text;
+        if (this.text === "Light"){
+            settings["isLight"] = true;
+        }
+        else{
+            settings["isLight"] = false;
+        }
         dropdownLabel.children("div").html(this.text + "&nbsp;&nbsp;");
 
         for (child of dropdownMenu.children("a")){
@@ -155,7 +160,6 @@ function initializeAppearance(){
         updateDatabase();
         initializeTheme();
     });
-    updateDatabase();
     initializeTheme();
 }
 
@@ -187,7 +191,6 @@ function initializePrivacy(){
         updateDatabase();
         initializeTheme();
     });
-    updateDatabase();
     initializeTheme();
 }
 
@@ -205,7 +208,7 @@ function updateSettingsMenu(index){
     selectedMenuOption = index;
     currentPageTitle = menuButtons[index].html();
     for (buttonIndex in menuButtons){
-        if (settings["theme"] == "Dark"){
+        if (settings["isLight"] === false){
             if (buttonIndex != index){
                 menuButtons[buttonIndex].attr("class", "button is-light has-text-grey-lighter has-background-grey")
             }
@@ -255,5 +258,7 @@ function updateSettingsList(){
 }
 
 function updateDatabase(){
-    // CODE TO WRITE "settings" TO DATABASE
+    // CODE TO WRITE CHANGED SETTINGS TO DATABASE
+    // $.post("/settings-update", {isLightMode: settings["isLight"], accountIsPrivate: settings["isPrivate"]});
+    $.post("/settings-update", {username: username, isLightMode: settings["isLight"], accountIsPrivate: settings["isPrivate"]});
 }
