@@ -1,5 +1,5 @@
 let settings = {
-    "isLight": false,
+    "isLight": true,
     "isPrivate": true
 }
 
@@ -118,8 +118,15 @@ function initializeAppearance(){
 
     // Theme dropdown menu initialization
     let dropdownLabel = $("button#dropdown_label");
+
+    if (settings["isLight"] === true) {
+        dropdownLabel.append("<div>Light&nbsp;&nbsp;</div>");
+    }
+    else{
+        dropdownLabel.append("<div>Dark&nbsp;&nbsp;</div>")
+    }
+
     dropdownLabel.append(
-        "<div>Light&nbsp;&nbsp;</div>" +
         "<span class=\"icon is-small\">" + 
         "<i id=\"arrow\" class=\"fas fa-angle-down\"></i>" +
         "</span>"
