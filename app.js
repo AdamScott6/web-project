@@ -2,6 +2,7 @@
 let express = require("express");
 let mongoose = require("mongoose");
 let User = require("./models/user");
+// var Post = require("./models/post.js")
 
 // Instantiate express application
 let app = express();
@@ -69,3 +70,22 @@ app.get("/profile-data", async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
+//------------------------
+// fetching profile settings for settings.html
+app.get("/settings-data", async (req, res) => {
+  try {
+    const profileData = await User.find({});
+    res.json(profileData);
+  } catch (err) {
+    // console.log(profileData);
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+// app.post("/settings-update", (req, res) => {
+//   var post = new Post(
+
+//   )
+// })

@@ -1,6 +1,6 @@
 let settings = {
     "theme": "Light",
-    "visibility": "Private"
+    "isPrivate": true
 }
 
 let currentPageTitle = "Appearance";
@@ -8,6 +8,11 @@ let menuButtons = []
 let selectedMenuOption = 0;
 
 $(document).ready(function () {
+    $.get("/settings-data", (data) => {
+        console.log(data);
+        settings["isPrivate"] = data[3].accountIsPrivate
+    });
+
     initializeSettings();
     initializeTheme();
 });
@@ -164,14 +169,14 @@ function initializePrivacy(){
     let radioOptions = 
     "<label class=\"radio\">" +
         "<input class=\"radio_option\" type=\"radio\" answer=\"Public\"";
-    if (settings["visibility"] === "Public"){
+    if (settings["isPrivate"] === false){
         radioOptions += "checked";
     }
     radioOptions += ">Public&nbsp;&nbsp;&nbsp;&nbsp;" +
     "</label>" +
     "<label class=\"radio\">" +
         "<input class=\"radio_option\" type=\"radio\" answer=\"Private\"";
-    if (settings["visibility"] === "Private"){
+    if (settings["isPrivate"] === true){
         radioOptions += "checked";
     }
     radioOptions += ">Private" + "</label>";
@@ -187,7 +192,12 @@ function initializePrivacy(){
 }
 
 function updateVisiblity(visibility){
-    settings["visibility"] = visibility;
+    if (visibility === "Private") {
+        settings["isPrivate"] = true;
+    }
+    else {
+        settings["isPrivate"] = false;
+    }
     initializePrivacy();
 }
 
