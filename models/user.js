@@ -3,35 +3,14 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-    },
-    fullName: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    accountIsPrivate: {
-      type: Boolean,
-      required: true,
-    },
-    aboutMe: {
-      type: String,
-      required: true,
-    },
-    profilePicture: {
-      type: String,
-      required: true,
-    },
-    // posts: [
-    //   {
-    //     type: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
-    //   },
-    // ],
+    username: String,
+    fullName: String, 
+    password: String,
+    accountIsPrivate: Boolean,
+    aboutMe: String,
+    profilePicture: String,
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    isLightMode: Boolean,
   },
   { timestamps: true }
 );

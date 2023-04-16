@@ -1,8 +1,8 @@
 // Import express and mongoose. Supported by Node.js, lets us include modules in our project.
 let express = require("express");
 let mongoose = require("mongoose");
-let User = require("./models/user");
-// var Post = require("./models/post.js")
+const User = require("./models/user");
+const Post = require("./models/post.js")
 
 // Instantiate express application
 let app = express();
