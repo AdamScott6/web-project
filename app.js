@@ -50,3 +50,22 @@ app.get('/current-user', (req, res) => {
     });
 })
 
+//------------------------
+// display profile details in profile.html
+
+app.get('/profile', (req, res) => {
+  User.find({})
+    .then((profiles) => {
+      res.sendFile(__dirname + "/public/profile.html");
+    });
+  });
+
+app.get("/profile-data", async (req, res) => {
+  try {
+    const profileData = await User.find({});
+    res.json(profileData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
