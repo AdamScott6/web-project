@@ -1,29 +1,44 @@
 window.onload = function () {
-    const emailInput = document.getElementById('email');
+    const userInput = document.getElementById('user');
     const passwordInput = document.getElementById('password');
     const loginForm = document.getElementById('mainBody');
+    // let accounts;
 
-    loginForm.addEventListener('submit', (event) => {
-        // Prevent the form from submitting
-        event.preventDefault();
+    $.get("/account-data", (accounts) => {
+        console.log(accounts);
+        // accounts = data;
+        loginForm.addEventListener('submit', (event) => {
+            // Prevent the form from submitting
+            event.preventDefault();
 
-        // Get the email and password values
-        const email = emailInput.value;
-        const password = passwordInput.value;
+            // Get the username and password values
+            const username = userInput.value;
+            const password = passwordInput.value;
 
-        // Check if the email and password are correct
-        // if (email === 'user@example.com' && password === 'password') {
-        if (email === 'user' && password === 'password') {
-            // Save the email in local storage
-            localStorage.setItem('email', email);
+            // Check if the username and password are correct
+            const foundAccount = accounts.find(account => account.username === username && account.password === password);
+            if (foundAccount) {
+                // Save the username in local storage
+                localStorage.setItem('username', username);
+                console.log(foundAccount._id);
 
-            // Redirect to the account page
-            window.location.href = 'account.html';
-        } else {
-            // Display an error message
-            const errorMessage = document.createElement('p');
-            errorMessage.textContent = 'Invalid email or password.';
-            loginForm.appendChild(errorMessage);
-        }
+                // Redirect to the account page
+                // window.location.href = `/account.html?currentUserId=${foundAccount._id}`;
+                fetch(`/account?currentUserId=${foundAccount._id}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        window.location.href = response.url;
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            } else {
+                // Display an error message
+                const errorMessage = document.getElementById('wrongLogin');
+                errorMessage.textContent = 'Invalid username or password.';
+            }
+        });
     });
 };
