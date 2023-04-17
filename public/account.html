@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/account.css" />
     <script type="text/javascript" src="scripts/account.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Account Page</title>
 </head>
 
@@ -34,22 +37,25 @@
     </div>
 
     <form id = "mainBody" action="login.html" class="center">
-        <img src="lib/default.jpg" class="avatar">
+        <img id="profilePicture" src="lib/default.jpg" class="avatar">
 
-        <label id = "username" for="username">USERNAME PLACEHOLDER:</label>
+        <label id = "username">USERNAME PLACEHOLDER:</label>
 
         <input id="signOut" type="submit" value="Sign Out">
     </form>
+
     <form id = "changeUsername" class="center">
+        <input type="text" placeholder="Enter New Username" id="newUsername" name="newUsername" required>
         <input type="submit" value="Change Username" id="changeUsernameButton">
     </form>
-    <form id = "changeEmail" class="center">
-        <input type="submit" value="Change Email" id="changeEmailButton">
-    </form>
+
     <form id = "changeProfilePicture" class="center">
+        <input type="text" placeholder="Enter New Picture URL" id="newProfilePicture" name="newProfilePicture" required>
         <input type="submit" value="Change Profile Picture" id="changeProfilePictureButton">
     </form>
+
     <form id = "changePassword" class="center">
+        <input type="text" placeholder="Enter New Password" id="newPassword" name="newPassword" required>
         <input type="submit" value="Change Password" id="changePasswordButton">
     </form>
 </body>

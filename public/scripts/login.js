@@ -2,7 +2,6 @@ window.onload = function () {
     const userInput = document.getElementById('user');
     const passwordInput = document.getElementById('password');
     const loginForm = document.getElementById('mainBody');
-    // let accounts;
 
     $.get("/account-data", (accounts) => {
         console.log(accounts);
@@ -19,7 +18,7 @@ window.onload = function () {
             const foundAccount = accounts.find(account => account.username === username && account.password === password);
             if (foundAccount) {
                 // Save the username in local storage
-                localStorage.setItem('username', username);
+                localStorage.setItem('Id', foundAccount._id);
                 console.log(foundAccount._id);
 
                 // Redirect to the account page

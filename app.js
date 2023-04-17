@@ -121,16 +121,21 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/account', (req, res) => {
-    currentUserId = req.query;
-    if (Object.keys(currentUserId).length === 0) {
-        res.redirect('/login.html');
-    } else {
-        User.find({})
-            .then((account) => {
-                console.log('accountId:', currentUserId);
-                res.sendFile(__dirname + "/public/account.html");
-            });
+    currentUserId = req.query.currentUserId;
+
+    if (!mongoose.Types.ObjectId.isValid(currentUserId)) {
+        return res.status(400).send('Invalid currentUserId');
     }
+
+    User.find({})
+        .then((account) => {
+            console.log('accountId:', currentUserId);
+            res.sendFile(__dirname + "/public/account.html");
+        })
+        .catch((error) => {
+            console.error('There was a problem with the fetch operation:', error);
+            res.status(500).send('Internal Server Error');
+        });
 });
 
 app.get("/account-data", async (req, res) => {
@@ -143,13 +148,59 @@ app.get("/account-data", async (req, res) => {
     }
 });
 
-app.post("/update-account", async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        const updatedUser = await User.findByIdAndUpdate(currentUserId, { username, password }, { new: true });
-        res.json(updatedUser);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
+app.post("/change-username", (req, res) => {
+    if (currentUserId != -1) {
+        const newUsername = req.body.newUsername;
+        User.findByIdAndUpdate(
+            currentUserId,
+            { username: newUsername },
+            { new: true }
+        )
+            .then((result) => {
+                console.log("Username updated:", result.username);
+                res.send("Username updated");
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).send("Internal server error");
+            });
+    }
+});
+
+app.post("/change-profile-picture", (req, res) => {
+    if (currentUserId != -1) {
+        const newProfilePicture = req.body.newProfilePicture;
+        User.findByIdAndUpdate(
+            currentUserId,
+            { profilePicture: newProfilePicture },
+            { new: true }
+        )
+            .then((result) => {
+                console.log("profilePicture updated:", result.ProfilePicture);
+                res.send("profilePicture updated");
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).send("Internal server error");
+            });
+    }
+});
+
+app.post("/change-password", (req, res) => {
+    if (currentUserId != -1) {
+        const newPassword = req.body.newPassword;
+        User.findByIdAndUpdate(
+            currentUserId,
+            { password: newPassword },
+            { new: true }
+        )
+            .then((result) => {
+                console.log("password updated:", result.Password);
+                res.send("password updated");
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).send("Internal server error");
+            });
     }
 });
