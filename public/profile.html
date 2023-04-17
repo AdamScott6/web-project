@@ -62,7 +62,7 @@
 
 
         <div class="add-post">
-            <a class="button is-dark">
+            <a class="button is-dark" onclick="createPost()">
               Add New Post +
             </a>
         </div>
@@ -97,7 +97,20 @@
 </div>
  
 
-<!-- <script src="scripts/profile.js"></script> -->
+<div class="form-popup" id="postForm">
+  <form method="post" action="/profile" class="form-container">
+    <h1><b>Create New Post</b></h1>
+    <br>
+    <textarea placeholder=" Enter Content" name="post" required class="post-content"></textarea>
+
+    <button type="submit" class="btn">Create</button>
+    <button type="button" class="btn cancel" onclick="cancelPost()">Cancel</button>
+  </form>
+</div>
+
+
+
+<script src="scripts/profile.js"></script>
 
 </body>
 </html>
