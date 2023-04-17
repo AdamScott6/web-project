@@ -11,6 +11,7 @@ const userSchema = new Schema(
     profilePicture: String,
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
     isLightMode: Boolean,
+    bannerImage: String
   },
   { timestamps: true }
 );
