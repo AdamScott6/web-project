@@ -23,53 +23,83 @@
 // }
 
 
-$(document).ready(() => {
-  $.get("/profile-data", (data) => {
-    // contains array of profile documents from the server
-    const profile = data[0]; // assumes only 1 profile in collection
-    
-    // banner updated
-    //$("#banner_image").attr("src", profile.bannerImageUrl);
-    
-    // profile pic updated
-    $("#profile_pic").attr("src", profile.profilePicture);
-    
-    // name and handle updated
-    $(".text").html(`${profile.fullName} <br> @${profile.username}`);
-    
-    // about me section updated
-    $(".about-me").html(profile.aboutMe);
+window.onload = function() {
+  // to change image for banner when user clicks the banner
+  document.getElementById("banner_image").addEventListener("click", function() {
+    document.getElementById("banner_input").click();
+  });
 
-    //to change image for banner when user clicks the banner
-    $("#banner_image").on("click", function() {
-      $("#banner_input").click();
-    });
+  document.getElementById("banner_input").addEventListener("change", function() {
+    const banner = this.files[0];
+    const fileReader = new FileReader();
+    
+    fileReader.onload = function(event) {
+      document.getElementById("banner_image").src = event.target.result;
+    };
 
-    $("#banner_input").on("change", function() {
-      const banner = this.files[0];
-      const fileReader = new FileReader();
+    fileReader.readAsDataURL(banner);
+  });
+
+  //to change image for profile pic when user clicks the image
+  document.getElementById("profile_pic").addEventListener("click", function() {
+    document.getElementById("profile_input").click();
+  });
+
+  document.getElementById("profile_input").addEventListener("change", function() {
+    const profile = this.files[0];
+    const fileReader = new FileReader();
+    
+    fileReader.onload = function(event) {
+      document.getElementById("profile_pic").src = event.target.result;
+    };
+
+    fileReader.readAsDataURL(profile);
+  });
+};
+
+
+
+  $(document).ready(() => {
+    $.get("/profile-data", (data) => {
+      // The data variable contains the array of profile documents from the server
+      const profile = data[0]; // Assuming there is only one profile document in the collection
       
-      fileReader.onload = function(event) {
-        $("#banner_image").attr("src", event.target.result);
-      };
-  
-      fileReader.readAsDataURL(banner);
-    });
-
-    //to change image for profile pic when user clicks the image
-    $("#profile_pic").on("click", function() {
-      $("#profile_input").click();
-    });
-
-    $("#profile_input").on("change", function() {
-      const profile = this.files[0];
-      const fileReader = new FileReader();
+      // Update the banner image
+      $("#banner_image").attr("src", profile.bannerImageUrl);
       
-      fileReader.onload = function(event) {
-        $("#profile_pic").attr("src", event.target.result);
-      };
-  
-      fileReader.readAsDataURL(profile);
+      // Update the profile picture
+      $("#profile_pic").attr("src", profile.profilePicture);
+      
+      // Update the name and handle
+      $(".text").html(`${profile.fullName} <br> @${profile.username}`);
+      
+      // Update the about me section
+      $(".about-me").html(profile.aboutMe);
+
+      // $(".box .latest-posts").html(profile.content);
+      
+      // Update the latest posts section
+      // const postsHtml = profile.posts.map((post) => {
+      //   return `
+      //     <div class="post">
+      //       <p>${post.content}</p>
+      //       <p>${post.date}</p>
+      //     </div>
+      //   `;
+      // }).join("");
+      // $(".latest-posts .box").html(postsHtml);
     });
   });
-});
+
+//---------------------------
+
+
+
+function createPost() {
+  document.getElementById("postForm").style.display = "block";
+}
+
+function cancelPost() {
+  document.getElementById("postForm").style.display = "none";
+}
+
