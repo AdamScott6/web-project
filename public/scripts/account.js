@@ -2,8 +2,6 @@ window.onload = function () {
     // const email = localStorage.getItem('email');
     const mainBody = document.getElementById('mainBody');
 
-    document.getElementById('username').textContent = "TEST";
-
     $.get("/account-data", (accounts) => {
 
         const currentAccount = accounts.find(account => account._id === localStorage.getItem('Id'));
@@ -45,6 +43,7 @@ window.onload = function () {
                     alert("Error updating username");
                 },
             });
+            location.reload();
         });
 
         const changeProfilePicture = document.getElementById('changeProfilePicture');
@@ -66,6 +65,7 @@ window.onload = function () {
                     alert("Error updating username");
                 },
             });
+            location.reload();
         });
 
         const changePassword = document.getElementById('changePassword');
@@ -87,6 +87,7 @@ window.onload = function () {
                     alert("Error updating Password");
                 },
             });
+            location.reload();
         });
     });
 };
