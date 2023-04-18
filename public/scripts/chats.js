@@ -37,8 +37,8 @@ const app = Vue.createApp({
                 // console.log("userData");
                 // console.log(this.userData);
             },
-            log(name, username) {
-                var userInfo = { name: name, username: username }; 
+            log(name, username, pfp) {
+                var userInfo = { name: name, username: username, pfp: pfp}; 
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 window.location='chatLog.html'
             },            

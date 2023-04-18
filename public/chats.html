@@ -75,7 +75,7 @@
     <div id="app">
         <div class="card" v-for="(user, i) in userData" :key="i">
             <img class="profilePic" :src="userData[i].pic" alt="profile picture" width="48" height="48">
-            <div class="textBox" @click="log(user.name,  user.username)">
+            <div class="textBox" @click="log(user.name,  user.username, user.pic)">
                 <div class="textContent">
                     <p class="name">{{ user.name }} (@{{ user.username }})</p>
                     <span class="time">[Insert] min ago</span>
