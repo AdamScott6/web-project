@@ -153,3 +153,7 @@ label.radio-dark {
     background-color: black;
     color: white;
 }
+
+td#notLoggedIn{
+    text-align: center;
+}

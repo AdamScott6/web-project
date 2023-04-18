@@ -1,6 +1,6 @@
 let settings = {
     "isLight": true,
-    "isPrivate": true
+    "isPrivate": false
 }
 
 let currentPageTitle = "Appearance";
@@ -9,14 +9,23 @@ let selectedMenuOption = 0;
 let id = "";
 let themeChanged = false;
 let privacyChanged = false;
+let isLoggedIn = true;
 
 $(document).ready(function () {
     $.get("/settings-data", (data) => {
-        console.log(data)
-        console.log(data[3]);
-        id = data[3]._id;
-        settings["isLight"] = data[3].isLightMode;
-        settings["isPrivate"] = data[3].accountIsPrivate;
+        if (typeof(data) != "string"){
+            id = data._id;
+            if (data.isLightMode !== undefined){
+                settings["isLight"] = data.isLightMode;
+            }
+            if (data.accountIsPrivate !== undefined){
+                settings["isPrivate"] = data.accountIsPrivate;
+            }
+            isLoggedIn = true;
+        }
+        else{
+            isLoggedIn = false;
+        }
     }).then((result) => {
         menuButtons = [$("button#appearance_button"), $("button#privacy_button")];
         initializeAppearance();
@@ -26,7 +35,7 @@ $(document).ready(function () {
 });
 
 function initializeTheme(){
-    if (settings["isLight"] === true){
+    if (settings["isLight"]){
         // Background behind the tiles
         if ($("body").attr("class").includes("body-dark")){
             $("body").removeClass("body-dark");
@@ -115,99 +124,115 @@ function initializeTheme(){
 }
 
 function initializeAppearance(){
-    // Theme label
-    let settingLabel = $("td#setting_label");
-    settingLabel.append("<div id=\"setting_label_text\" class=\"container\">Theme</div>")
+    if (isLoggedIn) {
+        // Theme label
+        let settingLabel = $("td#setting_label");
+        settingLabel.append("<div id=\"setting_label_text\" class=\"container\">Theme</div>")
 
-    // Theme dropdown menu initialization
-    let dropdownLabel = $("button#dropdown_label");
+        // Theme dropdown menu initialization
+        let dropdownLabel = $("button#dropdown_label");
 
-    if (settings["isLight"] === true) {
-        dropdownLabel.append("<div>Light&nbsp;&nbsp;</div>");
-    }
-    else{
-        dropdownLabel.append("<div>Dark&nbsp;&nbsp;</div>")
-    }
-
-    dropdownLabel.append(
-        "<span class=\"icon is-small\">" + 
-        "<i id=\"arrow\" class=\"fas fa-angle-down\"></i>" +
-        "</span>"
-    );
-
-    let dropdownMenu = $("div#dropdown_menu");
-    dropdownOptions = "<a class=\"dropdown-item\"";
-    
-    if (settings["isLight"] === true){
-        dropdownOptions += "id=\"selectedOption\"";
-    }
-    dropdownOptions += ">Light</a><a class=\"dropdown-item\"";
-    if (settings["isLight"] === false){
-        dropdownOptions += "id=\"selectedOption\"";
-    }
-    
-    dropdownOptions += ">Dark</a>";
-    dropdownMenu.append(dropdownOptions);
-
-    $("a.dropdown-item").click(function(){
-        if (this.text === "Light"){
-            if (!(settings["isLight"])){
-                themeChanged = true;
-                settings["isLight"] = true;
-            }
+        if (settings["isLight"]) {
+            dropdownLabel.append("<div>Light&nbsp;&nbsp;</div>");
         }
         else{
-            if (settings["isLight"]){
-                themeChanged = true;
-                settings["isLight"] = false;
-            }
+            dropdownLabel.append("<div>Dark&nbsp;&nbsp;</div>")
         }
-        dropdownLabel.children("div").html(this.text + "&nbsp;&nbsp;");
 
-        for (child of dropdownMenu.children("a")){
-            if (child.text == this.text){
-                child.id = "selectedOption";
+        dropdownLabel.append(
+            "<span class=\"icon is-small\">" + 
+            "<i id=\"arrow\" class=\"fas fa-angle-down\"></i>" +
+            "</span>"
+        );
+
+        let dropdownMenu = $("div#dropdown_menu");
+        dropdownOptions = "<a class=\"dropdown-item\"";
+        
+        if (settings["isLight"]){
+            dropdownOptions += "id=\"selectedOption\"";
+        }
+        dropdownOptions += ">Light</a><a class=\"dropdown-item\"";
+        if (!(settings["isLight"])){
+            dropdownOptions += "id=\"selectedOption\"";
+        }
+        
+        dropdownOptions += ">Dark</a>";
+        dropdownMenu.append(dropdownOptions);
+
+        $("a.dropdown-item").click(function(){
+            if (this.text === "Light"){
+                if (!(settings["isLight"])){
+                    themeChanged = true;
+                    settings["isLight"] = true;
+                }
             }
             else{
-                child.id = "";
+                if (settings["isLight"]){
+                    themeChanged = true;
+                    settings["isLight"] = false;
+                }
             }
-        }
-        updateSettingsMenu(selectedMenuOption);
-        updateDatabase(0);
+            dropdownLabel.children("div").html(this.text + "&nbsp;&nbsp;");
+
+            for (child of dropdownMenu.children("a")){
+                if (child.text == this.text){
+                    child.id = "selectedOption";
+                }
+                else{
+                    child.id = "";
+                }
+            }
+            updateSettingsMenu(selectedMenuOption);
+            updateDatabase(0);
+            initializeTheme();
+        });
         initializeTheme();
-    });
-    initializeTheme();
+    }
+    else{
+        $("tr#settings_body td").remove();
+        $("tr#settings_body").append(
+            "<td id=\"notLoggedIn\">Please login first!</td>"
+        );
+    }
 }
 
 function initializePrivacy(){
-    let settingLabel = $("td#setting_label");
-    settingLabel.empty();
-    settingLabel.append("<div id=\"setting_label_text\" class=\"container\">Visibility</div>")
+    if (isLoggedIn) {
+        let settingLabel = $("td#setting_label");
+        settingLabel.empty();
+        settingLabel.append("<div id=\"setting_label_text\" class=\"container\">Visibility</div>")
 
-    let radio = $("div#visibility_radio");
-    radio.empty();
-    let radioOptions = 
-    "<label class=\"radio\">" +
-        "<input class=\"radio_option\" type=\"radio\" answer=\"Public\"";
-    if (settings["isPrivate"] === false){
-        radioOptions += "checked";
-    }
-    radioOptions += ">Public&nbsp;&nbsp;&nbsp;&nbsp;" +
-    "</label>" +
-    "<label class=\"radio\">" +
-        "<input class=\"radio_option\" type=\"radio\" answer=\"Private\"";
-    if (settings["isPrivate"] === true){
-        radioOptions += "checked";
-    }
-    radioOptions += ">Private" + "</label>";
-    radio.append(radioOptions);
+        let radio = $("div#visibility_radio");
+        radio.empty();
+        let radioOptions = 
+        "<label class=\"radio\">" +
+            "<input class=\"radio_option\" type=\"radio\" answer=\"Public\"";
+        if (!(settings["isPrivate"])){
+            radioOptions += "checked";
+        }
+        radioOptions += ">Public&nbsp;&nbsp;&nbsp;&nbsp;" +
+        "</label>" +
+        "<label class=\"radio\">" +
+            "<input class=\"radio_option\" type=\"radio\" answer=\"Private\"";
+        if (settings["isPrivate"]){
+            radioOptions += "checked";
+        }
+        radioOptions += ">Private" + "</label>";
+        radio.append(radioOptions);
 
-    $("input.radio_option").click(function(){
-        updateVisiblity($(this).attr("answer"));
-        updateDatabase(1);
+        $("input.radio_option").click(function(){
+            updateVisiblity($(this).attr("answer"));
+            updateDatabase(1);
+            initializeTheme();
+        });
         initializeTheme();
-    });
-    initializeTheme();
+    }
+    else{
+        $("tr#settings_body td").remove();
+        $("tr#settings_body").append(
+            "<td id=\"notLoggedIn\">Please login first!</td>"
+        );
+    }
 }
 
 function updateVisiblity(visibility){
@@ -225,7 +250,7 @@ function updateSettingsMenu(index){
     selectedMenuOption = index;
     currentPageTitle = menuButtons[index].html();
     for (buttonIndex in menuButtons){
-        if (settings["isLight"] === false){
+        if (!(settings["isLight"])){
             if (buttonIndex != index){
                 menuButtons[buttonIndex].attr("class", "button is-light has-text-grey-lighter has-background-grey")
             }
