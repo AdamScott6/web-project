@@ -35,8 +35,18 @@ app.get("/", (req, res) => {
 });
 
 // Serve a static HTML file for /main.html
-app.get("/home.html", (req, res) => {
-    res.sendFile(__dirname + "/home.html");
+app.get('/home', (req, res) => {
+    User.find({})
+        .then((profiles) => {
+            res.sendFile(__dirname + "/public/home.html");
+        });
+});
+
+app.get('/chats', (req, res) => {
+    User.find({})
+        .then((profiles) => {
+            res.sendFile(__dirname + "/public/chats.html");
+        });
 });
 
 // User routes
@@ -73,6 +83,13 @@ app.get("/profile-data", async (req, res) => {
 });
 
 //------------------------
+app.get('/settings', (req, res) => {
+    User.find({})
+        .then((profiles) => {
+            res.sendFile(__dirname + "/public/settings.html");
+        });
+});
+
 // fetching profile settings for settings.html
 app.get("/settings-data", async (req, res) => {
     try {
