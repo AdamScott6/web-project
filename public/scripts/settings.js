@@ -12,7 +12,10 @@ let privacyChanged = false;
 let isLoggedIn = true;
 
 $(document).ready(function () {
+    menuButtons = [$("button#appearance_button"), $("button#privacy_button")];
+    console.log(isLoggedIn)
     $.get("/settings-data", (data) => {
+        console.log(data)
         if (typeof(data) != "string"){
             id = data._id;
             if (data.isLightMode !== undefined){
@@ -27,7 +30,6 @@ $(document).ready(function () {
             isLoggedIn = false;
         }
     }).then((result) => {
-        menuButtons = [$("button#appearance_button"), $("button#privacy_button")];
         initializeAppearance();
         updateSettingsMenu(0);
         initializeTheme();

@@ -92,9 +92,15 @@ app.get('/settings', (req, res) => {
 
 // fetching profile settings for settings.html
 app.get("/settings-data", async (req, res) => {
+    console.log(currentUserId)
     try {
-        const profileData = await User.find({});
-        res.json(profileData);
+        if (currentUserId === -1){
+            res.send(undefined)
+        }
+        else{
+            const profileData = await User.findById(currentUserId);
+            res.json(profileData);
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Server Error" });
