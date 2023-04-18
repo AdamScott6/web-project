@@ -115,9 +115,22 @@ app.post("/settings-updateprivacy", (req, res) => {
 // display account details in account.html
 
 app.get('/login', (req, res) => {
-    currentUserId = -1;
-    console.log(currentUserId);
-    res.sendFile(__dirname + "/public/login.html");
+    if (currentUserId != -1){
+        // res.sendFile(__dirname + "/public/account.html");
+        User.find({})
+        .then((account) => {
+            console.log('automatic login');
+            res.sendFile(__dirname + "/public/account.html");
+        })
+        .catch((error) => {
+            console.error('There was a problem with the fetch operation:', error);
+            res.status(500).send('Internal Server Error');
+        });
+    }
+    else {
+        console.log(currentUserId);
+        res.sendFile(__dirname + "/public/login.html");
+    }
 });
 
 app.get('/account', (req, res) => {
@@ -223,4 +236,9 @@ app.post("/create-account", (req, res) => {
         console.log(error);
         res.status(500).send("Internal server error");
       });
+});
+
+app.post("/logout-function", (req, res) => {
+    currentUserId = -1;
+    res.send('User has logged out')
 });

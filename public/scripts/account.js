@@ -20,6 +20,18 @@ window.onload = function () {
             // Delete the account details from local storage
             localStorage.setItem('Id', "-1");
 
+            $.ajax({
+                url: "/logout-function",
+                type: "POST",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Error logging out");
+                },
+            });
+
             // Redirect to the login page
             window.location.href = 'login.html';
         });
