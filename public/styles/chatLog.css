@@ -45,6 +45,7 @@ a.page_label:hover {
     display: flex;
     align-items: center;
     padding-left: 5px;
+    vertical-align: middle;
 }
 
 .back-button .icon {
@@ -53,6 +54,11 @@ a.page_label:hover {
 
 .back-button .icon path {
     height: 100%;
+}
+
+.back-button a svg {
+    display: flex;
+    vertical-align: middle;
 }
 
 .card-header .img-avatar {
