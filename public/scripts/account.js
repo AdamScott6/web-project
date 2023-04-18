@@ -1,3 +1,5 @@
+let isLight = true;
+
 window.onload = function () {
     // const email = localStorage.getItem('email');
     const mainBody = document.getElementById('mainBody');
@@ -7,6 +9,10 @@ window.onload = function () {
         const currentAccount = accounts.find(account => account._id === localStorage.getItem('Id'));
 
         console.log(currentAccount);
+        if (currentAccount !== undefined){
+            isLight = currentAccount["isLightMode"];
+        }
+        initializeTheme();
 
         document.getElementById('username').textContent = currentAccount.username;
         if (currentAccount.profilePicture != null) {
@@ -103,3 +109,18 @@ window.onload = function () {
         });
     });
 };
+
+function initializeTheme(){
+    if (isLight){
+        if ($("body").attr("class").includes("body-dark")){
+            $("body").removeClass("body-dark");
+        }
+        $("body").addClass("body-light");
+    }
+    else{
+        if ($("body").attr("class").includes("body-light")){
+            $("body").removeClass("body-light");
+        }
+        $("body").addClass("body-dark");
+    }
+}
