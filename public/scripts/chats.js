@@ -1,4 +1,6 @@
 
+
+
 const app = Vue.createApp({
         data() {
             return {
@@ -20,8 +22,8 @@ const app = Vue.createApp({
                 
                 this.photos = finalRes;
                 this.photos = this.photos.slice(0,10);
-                console.log("pictures from load pictures");
-                console.log(this.photos);
+                // console.log("pictures from load pictures");
+                // console.log(this.photos);
                 this.mapPicture();
             },
             mapPicture() {
@@ -32,10 +34,14 @@ const app = Vue.createApp({
                         pic: this.photos[index].url,
                     }); 
                 });
-                console.log("userData");
-                console.log(this.userData);
-        
-            }            
+                // console.log("userData");
+                // console.log(this.userData);
+            },
+            log(name, username) {
+                var userInfo = { name: name, username: username }; 
+                localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                window.location='chatLog.html'
+            },            
         },
         mounted() {
             this.loadUsers(),
