@@ -1,5 +1,5 @@
 Database Work (Mongoose and MongoDB): Adam Scott
-Home Page (Including HTML, CSS and JS): Thomas Chiarello
+Home Page (Including HTML, CSS and JS): Thomas Chiarello and Adam Scott
 Profile Page (Including HTML, CSS, JS, AJAX): Sara Bhatti
 Chats Page (Including HTML, CSS and JS): Ajaane Kanagasabai
 Accounts Page (Including HTML, CSS and JS): Nicholas Panait
