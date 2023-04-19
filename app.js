@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 });
 
 // Serve a static HTML file for /main.html
-app.get('/home', (req, res) => {
+app.get('/home', requireLogin, (req, res) => {
     User.find({})
         .then((profiles) => {
             res.sendFile(__dirname + "/public/home.html");
