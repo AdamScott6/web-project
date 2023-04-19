@@ -41,13 +41,13 @@
 
 
 <div id="mainBody">
-        <div class="banner">
+        <div class="banner" title="Click to change banner image">
           <input type="file" id="banner_input" style="display: none;">
           <img src="images/test.png" id="banner_image">
         </div>
 
 
-        <div class="profile-pic-container">
+        <div class="profile-pic-container" title="Click to change profile image">
           <input type="file" id="profile_input" style="display: none;">
           <img src="images/default.svg" id="profile_pic">
         </div>
@@ -99,7 +99,7 @@
   <form method="post" action="/add-post" class="form-container">
     <h1><b>Create New Post</b></h1>
     <br>
-    <textarea placeholder=" Enter Content" name="post" required class="post-content"></textarea>
+    <textarea placeholder=" Write your post here... " name="post" required class="post-content"></textarea>
 
     <button type="submit" class="btn">Create</button>
     <button type="button" class="btn cancel" onclick="cancelPost()">Cancel</button>
@@ -113,3 +113,4 @@
 </html>
 
 <!--  -->
+
