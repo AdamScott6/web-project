@@ -1,7 +1,7 @@
 let id, fullname, username, pic;
 let currentUserId, currentChatlog;
 window.onload = function() {
-    $.get("/chats-user-data", (data) => {
+    $.get("/current-user", (data) => {
         console.log(data)
         if (typeof(data) != "string"){
             if (data.isLightMode !== undefined){
