@@ -59,29 +59,41 @@ window.onload = function() {
 
 
 
-  $(document).ready(() => {
-    $.get("/profile-details", (data) => {
-      //data variable contains array of profiles from server
-      const profile = data[0];
-      
-      // update the banner image
-      $("#banner_image").attr("src", profile.bannerImage);
-      
-      // update the profile picture
-      $("#profile_pic").attr("src", profile.profilePicture);
-      
-      // update the name and handle
-      if (profile.fullName !== undefined){
-        $(".text").html(`${profile.fullName} <br> @${profile.username}`);
-      }
-      else{
-        $(".text").html(`${profile.username} <br> @${profile.username}`);
-      }
-      
-      // update the about me section
-      $(".about-me").html(profile.aboutMe);
+$(document).ready(() => {
+  $.get("/profile-details", (data) => {
+    const profile = data[0];
+    $("#banner_image").attr("src", profile.bannerImage);
+    $("#profile_pic").attr("src", profile.profilePicture);
+    if (profile.fullName !== undefined){
+      $(".text").html(`${profile.fullName} <br> @${profile.username}`);
+    }
+    else{
+      $(".text").html(`${profile.username} <br> @${profile.username}`);
+    }
+    // shows current users about me and an edit button
+    $(".about").html(`<p>${profile.aboutMe}</p>`);
+    $(".about").append(`<br><button id="edit-aboutMe-button" class="button is-link is-small">Edit</button>`);
+    // handles click event of edit
+    $("#edit-aboutMe-button").click(() => {
+      // replaces current about me with a textarea element
+      const currentBio = $(".about p").html();
+      $(".about").html(`<textarea id="aboutme-textarea" class="textarea">${currentBio}</textarea>`);
+      // save button is added to save any edits to about me for the current user
+      $(".about").append(`<button id="save-aboutme-edit" class="button is-link is-small is-success">Save</button>`);
+      // handles click event for save
+      $("#save-aboutme-edit").click(() => {
+        const changedAboutMe = $("#aboutme-textarea").val();
+        //database is updated for the aboutme for current user
+        $.post("/update-bio", { aboutMe: changedAboutMe }, (data) => {
+          //updated about me is displayed
+          $(".about").html(`<p>${changedAboutMe}</p>`);
+          // edit button is added back
+          $(".about").append(`<br><button id="edit-aboutMe-button" class="button is-link is-small">Edit</button>`);
+        });
+      });
     });
   });
+});
 
 
   fetch("/profile-details")
