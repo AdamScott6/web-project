@@ -71,7 +71,7 @@ $(document).ready(() => {
       $(".text").html(`${profile.username} <br> @${profile.username}`);
     }
     // shows current users about me and an edit button
-    if (profile.aboutMe !== undefined) {
+    if (profile.aboutMe !== undefined && profile.aboutMe.trim() !== "") {
       $(".about").html(`<p>${profile.aboutMe}</p>`);
     } else {
       $(".about").html("Please update your bio by clicking edit...");
