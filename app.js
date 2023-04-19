@@ -132,6 +132,17 @@ app.get('/current-user', requireLogin, (req, res) => {
         });
 })
 
+// GET user by userId
+app.get('/getUser/:userId', async (req, res) => {
+  User.findById(new ObjectId(req.params.userId))
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      res.status(500).send('Internal server error');
+    });
+})
+
 //------------------------
 // display profile details in profile.html
 
@@ -283,6 +294,18 @@ app.get("/account-data", async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 });
+
+// GET all posts 
+app.get("/all-posts", async (req, res) => {
+  Post.find()
+        .then((result) => {
+          res.send(result);
+        })
+        .catch((error) => {
+          console.log(error);
+          res.status(500).send('Internal server error');
+      });
+})
 
 app.post("/change-username", (req, res) => {
     if (currentUserId != -1) {
