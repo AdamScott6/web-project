@@ -73,13 +73,43 @@ app.get('/profile', (req, res) => {
 });
 
 app.get("/profile-data", async (req, res) => {
-    try {
-        const profileData = await User.find({});
-        res.json(profileData);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
-    }
+  try {
+    const posts = await Post.find({ createdBy: currentUserId }).sort({ createdAt: "desc" });
+    res.json(posts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+
+app.get("/profile-details", async (req, res) => {
+  try {
+    const profileData = await User.find({});
+    res.json(profileData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+
+app.post("/add-post", (req, res) => {
+  // Create a new Post instance with the request body data
+  const newPost = new Post({
+    content: req.body.post,
+    createdBy: currentUserId // You need to set the current user ID here
+  });
+
+  // Save the new post to the database
+  newPost.save()
+    .then(savedPost => {
+      res.redirect(req.get('referer')); // Redirect back to the same page
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Unable to save post to database");
+    });
 });
 
 //------------------------
