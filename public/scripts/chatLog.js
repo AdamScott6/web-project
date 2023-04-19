@@ -26,6 +26,11 @@ window.onload = function() {
                         $("div.text-chat").removeClass("header-label-dark");
                     }
                     $("div.text-chat").addClass("header-label-light");
+
+                    if ($("div#card-body").attr("class").includes("card-body-is-dark")){
+                        $("div#card-body").removeClass("card-body-is-dark");
+                    }
+                    $("div#card-body").addClass("card-body-is-light");
                 }
                 else{
                     if ($("body").attr("class").includes("body-light")){
@@ -47,6 +52,11 @@ window.onload = function() {
                         $("div.text-chat").removeClass("header-label-light");
                     }
                     $("div.text-chat").addClass("header-label-dark");
+
+                    if ($("div#card-body").attr("class").includes("card-body-is-light")){
+                        $("div#card-body").removeClass("card-body-is-light");
+                    }
+                    $("div#card-body").addClass("card-body-is-dark");
                 }
             }
         }
@@ -93,7 +103,7 @@ window.onload = function() {
                 console.log("message.sender is: ", message.sender, "current user is: ", userId);
                 if (message.sender === userId) {
                     console.log("sender is current user!");
-                    var newMessage = $('<div>').addClass('.message-box right');
+                    var newMessage = $('<div>').addClass('message-box right');
                     let str = "<p>" + message.message + "</p>";
                     newMessage.append(str);
 
@@ -101,7 +111,7 @@ window.onload = function() {
                 }
                 else if (message.recipient === userId) {
                     console.log("recipient is current user!");
-                    var newMessage = $('<div>').addClass('.message-box left');
+                    var newMessage = $('<div>').addClass('message-box left');
                     let str = "<p>" + message.message + "</p>";
                     newMessage.append(str);
 

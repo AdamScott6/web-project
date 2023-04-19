@@ -53,6 +53,14 @@ div.is-dark{
     background-color: var(--dark-background);
 }
 
+div.card-body-is-light{
+    color: var(--text-color-light);
+}
+
+div.card-body-is-dark{
+    color: var(--text-color-dark);
+}
+
 div.header-is-light{
     background-color: var(--tile-background-light);
 }
