@@ -87,32 +87,31 @@ window.onload = function() {
         let chatRes = $.get(`/chatlog/${chatID}`, chatID);
         chatRes.done((data) => { 
             currentChatlog = data;
-            console.log("data is: ", data);
+            // console.log("data is: ", data);
             console.log("chatlog is", currentChatlog);
+            $.each(currentChatlog, function(index, message) {
+                console.log("message.sender is: ", message.sender, "current user is: ", userId);
+                if (message.sender === userId) {
+                    console.log("sender is current user!");
+                    var newMessage = $('<div>').addClass('.message-box right');
+                    let str = "<p>" + message.message + "</p>";
+                    newMessage.append(str);
+
+                    $('.messages-container').append(newMessage);
+                }
+                else if (message.recipient === userId) {
+                    console.log("recipient is current user!");
+                    var newMessage = $('<div>').addClass('.message-box left');
+                    let str = "<p>" + message.message + "</p>";
+                    newMessage.append(str);
+
+                    $('.messages-container').append(newMessage);
+                }
+            });
         });
     }
     catch(err) {
         console.log("chatlog was not  found");
         res.status(404).send('Chatlog not found');
     }
-    console.log("chatlog is ", currentChatlog);
-    console.log("chatInfo.sender is: ", chatInfo.sender, "current user is: ", userId);
-    if (chatInfo.sender === userId) {
-        console.log("sender is current user!");
-        var newMessage = $('<div>').addClass('.message-box right');
-        let str = "<p>" + chatInfo.message + "</p>";
-        newMessage.append(str);
-
-        $('.messages-container').append(newMessage);
-    }
-    else if (chatInfo.recipient === userId) {
-        console.log("recipient is current user!");
-        var newMessage = $('<div>').addClass('.message-box left');
-        let str = "<p>" + chatInfo.message + "</p>";
-        newMessage.append(str);
-
-        $('.messages-container').append(newMessage);
-    }
-
-
 }

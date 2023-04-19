@@ -99,10 +99,11 @@ app.get("/chats-user-data", async (req, res) => {
     res.status(500).json();
   }
 });
+
 app.get('/chatlog/:chatID', async (req, res) => {
   try {
-    const chats = await Messages.find({ chatId: req.params.chatID });
-    console.log(chats);
+    const chats = await Messages.find({ chatID: new ObjectId(req.params.chatID)});
+    console.log("chats is ", chats);
     res.json(chats);
   } catch (err) {
     res.status(404).send('User not found');
