@@ -45,7 +45,7 @@ function requireLogin(req, res, next) {
 
 
 // Serve main.html as the default page
-app.get("/", (req, res) => {
+app.get("/", requireLogin, (req, res) => {
     res.redirect("/home.html");
 });
 
