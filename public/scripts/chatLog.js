@@ -103,7 +103,7 @@ window.onload = function() {
                 console.log("message.sender is: ", message.sender, "current user is: ", userId);
                 if (message.sender === userId) {
                     console.log("sender is current user!");
-                    var newMessage = $('<div>').addClass('message-box right');
+                    let newMessage = $('<div>').addClass('message-box right');
                     let str = "<p>" + message.message + "</p>";
                     newMessage.append(str);
 
@@ -111,7 +111,7 @@ window.onload = function() {
                 }
                 else if (message.recipient === userId) {
                     console.log("recipient is current user!");
-                    var newMessage = $('<div>').addClass('message-box left');
+                    let newMessage = $('<div>').addClass('message-box left');
                     let str = "<p>" + message.message + "</p>";
                     newMessage.append(str);
 
@@ -124,4 +124,15 @@ window.onload = function() {
         console.log("chatlog was not  found");
         res.status(404).send('Chatlog not found');
     }
+
+    $('#button-send').click(function() {
+        send();
+    });
+}
+
+function send() {
+    let messageSend = $('.message-send').val();
+    $('.messages-container').append($('<div>').addClass('message-box right').append(messageSend));
+    $('.message-send').val('');
+    
 }
