@@ -1,19 +1,22 @@
 let isLight = true;
-let loadedData;
+// let loadedData;
 
 const app = Vue.createApp({
         data() {
             return {
                 users: [],
                 photos: [],
-                userData: []
+                userData: [],
+                loadedData: []
             }
         },
         methods: {
             async loadChats() {
-                const res = fetch("/chats-user-data");
+                console.log("in loadChats");
+                const res = await fetch("/chats-user-data");
                 const data = await res.json();
-                console.log(data); // Object containing the data
+                this.loadedData = data;
+                console.log("data in chats: ", this.loadedData); 
             },
             async loadUsers() {
                 const res = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -85,6 +88,7 @@ const app = Vue.createApp({
         mounted() {
             this.loadUsers(),
             this.loadPictures(),
+            this.loadChats(),
             this.initializeTheme()
         },
     computed: {

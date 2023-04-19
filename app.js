@@ -79,18 +79,37 @@ app.get('/chats', requireLogin, (req, res) => {
 
 app.get("/chats-user-data", async (req, res) => {
   try {
-    const chats = await Chatslist.find({
-      participants: { $in: new ObjectId(currentUserId) },
-    });
+    // console.log("This is currentuserID", currentUserId);
+    // console.log("type: ", typeof(currentUserId));
+    // Prints out an empty array
+
+    // const chats = await Chatslist.find({
+    //   participants: { $in: new ObjectId(currentUserId) },
+    // });
     // console.log("chats is: ", chats);
 
+    // Prints out null
+    Chatslist.findById('643f19524813c1aea935dbd1')
+        .then((result) => {
+            console.log("result is: ", result);
+        })
+
+    // const chats = await Chatslist.find({participants: new ObjectId(currentUserId)});
+    // console.log("Chats is: ", chats);
+    
+    // console.log("chats is: ", chats);await Chatslist.find({
+    //   participants: { $in: new ObjectId(currentUserId) },
+    // });
+    // console.log("chats is: ", chats);
+    
+    //Works but is sender is hardcoded 
     // Messages.find({sender: new ObjectId('64386af3beef1a0be1a26b85')})
     //     .then((result) => {
     //         console.log(result)
-    //         // res.send(result);
+    //         res.json(result);
     //     })
 
-    res.json(chats);
+    // res.json(chats);
   } catch (err) {
     console.log("Error:", err.message);
     res.status(500).json();

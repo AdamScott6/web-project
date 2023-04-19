@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const chatslistSchema = new Schema(
   {
     name: String,
-    participants: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
 
 );
