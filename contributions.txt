@@ -1,0 +1,7 @@
+Database Work (Mongoose and MongoDB): Adam Scott
+Home Page (Including HTML, CSS and JS): Thomas Chiarello
+Profile Page (Including HTML, CSS and JS): Sara Bhatti
+Chats Page (Including HTML, CSS and JS): Ajaane Kanagasabai
+Accounts Page (Including HTML, CSS and JS): Nicholas Panait
+Settings Page (Including HTML, CSS and JS): Alden Chan
+Theme Styling (CSS): Alden Chan
