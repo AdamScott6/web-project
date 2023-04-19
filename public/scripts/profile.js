@@ -64,16 +64,16 @@ window.onload = function() {
       //data variable contains array of profiles from server
       const profile = data[0];
       
-      // Update the banner image
+      // update the banner image
       $("#banner_image").attr("src", profile.bannerImage);
       
-      // Update the profile picture
+      // update the profile picture
       $("#profile_pic").attr("src", profile.profilePicture);
       
-      // Update the name and handle
+      // update the name and handle
       $(".text").html(`${profile.fullName} <br> @${profile.username}`);
       
-      // Update the about me section
+      // update the about me section
       $(".about-me").html(profile.aboutMe);
     });
   });
@@ -89,20 +89,34 @@ window.onload = function() {
 
 //---------------------------
 
-  // an ajax request is made to /profile-data
+// an ajax request is made to /profile-data
 fetch("/profile-data")
   .then((res) => res.json())
   .then((posts) => {
     //looping through posts which then are displayed in div=latest-posts
-    const latestPostsDiv = document.getElementById("latest-posts");
+    const latestPosts = document.getElementById("latest-posts");
     
     // previous content is cleared
-    latestPostsDiv.innerHTML = "";
+    latestPosts.innerHTML = "";
     
     posts.forEach((post) => {
       const postDiv = document.createElement("div");
       postDiv.textContent = post.content;
-      latestPostsDiv.appendChild(postDiv);
+      postDiv.classList.add("post");
+
+      // new element created for timestamp
+      const dateTime = document.createElement("span");
+
+      //took the text content of timestamp and formatted it
+      const timestamp = new Date(post.createdAt).toLocaleString();
+      dateTime.textContent = timestamp;
+      dateTime.classList.add("timestamp");
+
+      //added timestamp to post
+      postDiv.appendChild(dateTime);
+
+      //posts are added to the latestpost div
+      latestPosts.appendChild(postDiv);
     });
   })
   .catch((err) => console.error(err));
