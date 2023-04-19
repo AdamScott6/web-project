@@ -4,6 +4,8 @@ let mongoose = require("mongoose");
 const User = require("./models/user");
 const Post = require("./models/post.js");
 const Chatslist = require("./models/chatslist");
+const Messages = require("./models/messages");
+const { ObjectId } = require("mongodb");
 let currentUserId = -1;
 
 // Instantiate express application
@@ -74,16 +76,26 @@ app.get('/chats', requireLogin, (req, res) => {
         });
 });
 
-app.get("/chats-user-data", (req, res) => {
-    try {
-        const chats = Chatslist.find({ participants: currentUserId });
-        console.log(chats);
-        res.json(chats);
+
+app.get("/chats-user-data", async (req, res) => {
+  try {
+    const chats = await Chatslist.find({
+      participants: { $in: new ObjectId(currentUserId) },
+    });
+    // console.log("chats is: ", chats);
+
+    // Messages.find({sender: new ObjectId('64386af3beef1a0be1a26b85')})
+    //     .then((result) => {
+    //         console.log(result)
+    //         // res.send(result);
+    //     })
+
+    res.json(chats);
   } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
+    console.log("Error:", err.message);
+    res.status(500).json();
   }
-})
+});
 
 // User routes
 // GET call for current user (hardcoded user)
@@ -332,5 +344,3 @@ app.post("/logout-function", (req, res) => {
     res.send('User has logged out')
 });
 
-//------------------------
-// Chats

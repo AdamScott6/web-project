@@ -1,4 +1,5 @@
 let isLight = true;
+let loadedData;
 
 const app = Vue.createApp({
         data() {
@@ -9,6 +10,11 @@ const app = Vue.createApp({
             }
         },
         methods: {
+            async loadChats() {
+                const res = fetch("/chats-user-data");
+                const data = await res.json();
+                console.log(data); // Object containing the data
+            },
             async loadUsers() {
                 const res = await fetch("https://jsonplaceholder.typicode.com/users");
                 const finalRes = await res.json();

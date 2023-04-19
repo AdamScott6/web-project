@@ -10,6 +10,7 @@ const userSchema = new Schema(
     aboutMe: String,
     profilePicture: String,
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    // Chatslist: [{type: mongoose.Schema.Types.ObjectId, ref: "Chatslist"}],
     isLightMode: Boolean,
     bannerImage: String
   },
