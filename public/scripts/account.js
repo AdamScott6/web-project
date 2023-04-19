@@ -66,6 +66,26 @@ window.onload = function () {
             location.reload();
         });
 
+        const changeFullName = document.getElementById('changeFullName');
+        changeFullName.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const newFullName = document.getElementById("newFullName").value;
+
+            $.ajax({
+                url: "/change-fullName",
+                type: "POST",
+                data: { newFullName: newFullName },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Error updating username");
+                },
+            });
+            location.reload();
+        });
+
         const changeProfilePicture = document.getElementById('changeProfilePicture');
         changeProfilePicture.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -99,8 +119,6 @@ window.onload = function () {
                 data: { newPassword: newPassword },
                 success: function (data) {
                     console.log(data);
-                    // Update the displayed password with the new value
-                    document.getElementById("Password").textContent = newPassword;
                 },
                 error: function (error) {
                     console.log(error);

@@ -336,6 +336,25 @@ app.post("/change-username", (req, res) => {
     }
 });
 
+app.post("/change-fullName", (req, res) => {
+    if (currentUserId != -1) {
+        const newFullName = req.body.newFullName;
+        User.findByIdAndUpdate(
+            currentUserId,
+            { fullName: newFullName },
+            { new: true }
+        )
+            .then((result) => {
+                console.log("fullName updated:", result.newFullName);
+                res.send("fullName updated");
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).send("Internal server error");
+            });
+    }
+});
+
 app.post("/change-profile-picture", (req, res) => {
     if (currentUserId != -1) {
         const newProfilePicture = req.body.newProfilePicture;

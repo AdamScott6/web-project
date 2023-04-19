@@ -66,8 +66,8 @@ form.center {
 }
 
 #changeUsernameButton,
+#changeFullNameButton,
 #changeProfilePictureButton,
-#changeEmailButton,
 #changePasswordButton {
     background-color: grey;
     color: white;
