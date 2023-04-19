@@ -29,6 +29,18 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 // routes
+
+// if user successfully authenticated them goes to next() which proceeds to route handler otherwise
+// it keeps routing user to login page
+function requireLogin(req, res, next) {
+  if (currentUserId != -1) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
+
+
 // Serve main.html as the default page
 app.get("/", (req, res) => {
     res.redirect("/home.html");
@@ -43,7 +55,7 @@ app.get('/home', (req, res) => {
 });
 
 // Current User Data for home.html
-app.get("/home-user-data", (req, res) => {
+app.get("/home-user-data", requireLogin, (req, res) => {
     User.findById(currentUserId)
         .then((result) => {
             console.log(result)
@@ -54,14 +66,14 @@ app.get("/home-user-data", (req, res) => {
         });
 })
 
-app.get('/chats', (req, res) => {
+app.get('/chats', requireLogin, (req, res) => {
     User.find({})
         .then((profiles) => {
             res.sendFile(__dirname + "/public/chats.html");
         });
 });
 
-app.get("/chats-user-data", (req, res) => {
+app.get("/chats-user-data", requireLogin, (req, res) => {
     User.findById(currentUserId)
         .then((result) => {
             console.log(result)
@@ -74,7 +86,7 @@ app.get("/chats-user-data", (req, res) => {
 
 // User routes
 // GET call for current user (hardcoded user)
-app.get('/current-user', (req, res) => {
+app.get('/current-user', requireLogin, (req, res) => {
     User.findById(currentUserId)
         .then((result) => {
             console.log(result)
@@ -88,14 +100,14 @@ app.get('/current-user', (req, res) => {
 //------------------------
 // display profile details in profile.html
 
-app.get('/profile', (req, res) => {
+app.get('/profile', requireLogin, (req, res) => {
     User.find({})
         .then((profiles) => {
             res.sendFile(__dirname + "/public/profile.html");
         });
 });
 
-app.get("/profile-data", async (req, res) => {
+app.get("/profile-data", requireLogin, async (req, res) => {
   try {
     const posts = await Post.find({ createdBy: currentUserId }).sort({ createdAt: "desc" });
     res.json(posts);
@@ -106,7 +118,7 @@ app.get("/profile-data", async (req, res) => {
 });
 
 
-app.get("/profile-details", async (req, res) => {
+app.get("/profile-details", requireLogin, async (req, res) => {
   try {
     const profileData = await User.find({});
     res.json(profileData);
@@ -117,7 +129,7 @@ app.get("/profile-details", async (req, res) => {
 });
 
 
-app.post("/add-post", (req, res) => {
+app.post("/add-post", requireLogin, (req, res) => {
   // new post instance created with request from body data
   const newPost = new Post({
     content: req.body.post,
@@ -144,7 +156,7 @@ app.get('/settings', (req, res) => {
 });
 
 // fetching profile settings for settings.html
-app.get("/settings-data", async (req, res) => {
+app.get("/settings-data", requireLogin, async (req, res) => {
     console.log(currentUserId)
     try {
         if (currentUserId === -1){
