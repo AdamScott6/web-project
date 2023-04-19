@@ -95,16 +95,16 @@ app.get("/profile-details", async (req, res) => {
 
 
 app.post("/add-post", (req, res) => {
-  // Create a new Post instance with the request body data
+  // new post instance created with request from body data
   const newPost = new Post({
     content: req.body.post,
-    createdBy: currentUserId // You need to set the current user ID here
+    createdBy: currentUserId // current user id need to be set
   });
 
-  // Save the new post to the database
+  // new post is saved to database
   newPost.save()
     .then(savedPost => {
-      res.redirect(req.get('referer')); // Redirect back to the same page
+      res.redirect(req.get('referer')); // this redirects back to profile page
     })
     .catch(err => {
       console.error(err);
