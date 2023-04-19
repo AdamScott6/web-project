@@ -81,7 +81,7 @@ app.get("/chats-user-data", async (req, res) => {
   try {
     Chatslist.find({participants: { $in: new ObjectId(currentUserId) }})
         .then((result) => {
-            console.log("result is: ", result);
+            // console.log("result is: ", result);
             res.json(result);
         })
 
@@ -97,6 +97,18 @@ app.get("/chats-user-data", async (req, res) => {
   } catch (err) {
     console.log("Error:", err.message);
     res.status(500).json();
+  }
+});
+
+
+app.get('/users/:userId', async (req, res) => {
+  try {
+    // console.log("req.params.userId is ",req.params.userId);  
+    const user = await User.findById(req.params.userId);
+    console.log("sending to chat: ", user);
+    res.json(user);
+  } catch (err) {
+    res.status(404).send('User not found');
   }
 });
 

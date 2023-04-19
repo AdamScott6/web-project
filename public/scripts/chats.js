@@ -26,14 +26,31 @@ const app = Vue.createApp({
             mapChats() {
                 this.loadedData.forEach((chat, index) => {
                     let p;
-                    if (chat.participant != this.currentUserId){
-                        p = chat.participant;
-                    }
+                    chat.participants.forEach((user, index) => {
+                        if (user != this.currentUserId){
+                            p = user;
+                        }
+                    })
                     this.chatData.push({
                         name: chat.name,
-                        participant: p
+                        user: p
                     }); 
-                    console.log("this is chatData", this.chatData);
+                    // console.log("this is chatData", this.chatData);
+                    this.mapUser(p);
+                });
+            },
+            mapUser(userId) {
+                console.log("data in mapUser: ", userId);                
+                
+                let userRes = $.get(`/users/${userId}`, userId);
+                userRes.done((data) => {
+                    // console.log(data); 
+                    this.userData.push( {
+                        name: data.fullName,
+                        username: data.username,
+                        pic: data.profilePicture
+                    })
+                    console.log("this is userData", this.userData);
                 });
             },
             // async loadUsers() {
@@ -52,17 +69,17 @@ const app = Vue.createApp({
             //     // console.log(this.photos);
             //     this.mapPicture();
             // },
-            mapPicture() {
-                this.users.forEach((user, index) => {
-                    this.userData.push({
-                        name: user.name,
-                        username: user.username,
-                        pic: this.photos[index].url,
-                    }); 
-                });
-                // console.log("userData");
-                // console.log(this.userData);
-            },
+            // mapPicture() {
+            //     this.users.forEach((user, index) => {
+            //         this.userData.push({
+            //             name: user.name,
+            //             username: user.username,
+            //             pic: this.photos[index].url,
+            //         }); 
+            //     });
+            //     // console.log("userData");
+            //     // console.log(this.userData);
+            // },
             async initializeTheme() {
                 $.get("/settings-data", (data) => {
                     if (typeof(data) != "string"){
