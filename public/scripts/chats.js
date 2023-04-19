@@ -7,7 +7,9 @@ const app = Vue.createApp({
                 users: [],
                 photos: [],
                 userData: [],
-                loadedData: []
+                currentUserId: String,
+                loadedData: [],
+                chatData: []
             }
         },
         methods: {
@@ -17,23 +19,39 @@ const app = Vue.createApp({
                 const data = await res.json();
                 this.loadedData = data;
                 console.log("data in chats: ", this.loadedData); 
+                // this.users = this.loadedData.participants;
+                // console.log(this.loadedData.participants);
+                this.mapChats();
             },
-            async loadUsers() {
-                const res = await fetch("https://jsonplaceholder.typicode.com/users");
-                const finalRes = await res.json();
-                this.users = finalRes;
+            mapChats() {
+                this.loadedData.forEach((chat, index) => {
+                    let p;
+                    if (chat.participant != this.currentUserId){
+                        p = chat.participant;
+                    }
+                    this.chatData.push({
+                        name: chat.name,
+                        participant: p
+                    }); 
+                    console.log("this is chatData", this.chatData);
+                });
+            },
+            // async loadUsers() {
+            //     const res = await fetch("https://jsonplaceholder.typicode.com/users");
+            //     const finalRes = await res.json();
+            //     this.users = finalRes;
                 
-            },
-            async loadPictures() {
-                const res = await fetch("https://jsonplaceholder.typicode.com/photos");
-                const finalRes = await res.json();
+            // },
+            // async loadPictures() {
+            //     const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+            //     const finalRes = await res.json();
                 
-                this.photos = finalRes;
-                this.photos = this.photos.slice(0,10);
-                // console.log("pictures from load pictures");
-                // console.log(this.photos);
-                this.mapPicture();
-            },
+            //     this.photos = finalRes;
+            //     this.photos = this.photos.slice(0,10);
+            //     // console.log("pictures from load pictures");
+            //     // console.log(this.photos);
+            //     this.mapPicture();
+            // },
             mapPicture() {
                 this.users.forEach((user, index) => {
                     this.userData.push({
@@ -86,8 +104,8 @@ const app = Vue.createApp({
             },
         },
         mounted() {
-            this.loadUsers(),
-            this.loadPictures(),
+            // this.loadUsers(),
+            // this.loadPictures(),
             this.loadChats(),
             this.initializeTheme()
         },

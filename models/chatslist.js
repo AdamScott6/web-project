@@ -9,5 +9,5 @@ const chatslistSchema = new Schema(
 
 );
 
-const Chatslist = mongoose.model("Chatslist", chatslistSchema);
+const Chatslist = mongoose.model("Chatslist", chatslistSchema, 'chatslist');
 module.exports = Chatslist;
