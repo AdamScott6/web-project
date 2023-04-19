@@ -71,7 +71,11 @@ $(document).ready(() => {
       $(".text").html(`${profile.username} <br> @${profile.username}`);
     }
     // shows current users about me and an edit button
-    $(".about").html(`<p>${profile.aboutMe}</p>`);
+    if (profile.aboutMe !== undefined) {
+      $(".about").html(`<p>${profile.aboutMe}</p>`);
+    } else {
+      $(".about").html("Please update your bio by clicking edit...");
+    }
     $(".about").append(`<br><button id="edit-aboutMe-button" class="button is-link is-small">Edit</button>`);
     // handles click event of edit
     $("#edit-aboutMe-button").click(() => {
@@ -110,31 +114,30 @@ $(document).ready(() => {
 fetch("/profile-data")
   .then((res) => res.json())
   .then((posts) => {
-    //looping through posts which then are displayed in div=latest-posts
     const latestPosts = document.getElementById("latest-posts");
-    
-    // previous content is cleared
     latestPosts.innerHTML = "";
-    
-    posts.forEach((post) => {
-      const postDiv = document.createElement("div");
-      postDiv.textContent = post.content;
-      postDiv.classList.add("post");
 
-      // new element created for timestamp
-      const dateTime = document.createElement("span");
+    if (posts.length === 0) {
+      const message = document.createElement("div");
+      message.textContent = "Sorry, no posts yet. Click Add New Posts to start!";
+      message.classList.add("empty-posts");
+      latestPosts.appendChild(message);
+    } else {
+      posts.forEach((post) => {
+        const postDiv = document.createElement("div");
+        postDiv.textContent = post.content;
+        postDiv.classList.add("post");
 
-      //took the text content of timestamp and formatted it
-      const timestamp = new Date(post.createdAt).toLocaleString();
-      dateTime.textContent = timestamp;
-      dateTime.classList.add("timestamp");
+        const dateTime = document.createElement("span");
+        const timestamp = new Date(post.createdAt).toLocaleString();
+        dateTime.textContent = timestamp;
+        dateTime.classList.add("timestamp");
 
-      //added timestamp to post
-      postDiv.appendChild(dateTime);
+        postDiv.appendChild(dateTime);
 
-      //posts are added to the latestpost div
-      latestPosts.appendChild(postDiv);
-    });
+        latestPosts.appendChild(postDiv);
+      });
+    }
   })
   .catch((err) => console.error(err));
 
@@ -147,4 +150,6 @@ function createPost() {
 function cancelPost() {
   document.getElementById("postForm").style.display = "none";
 }
+
+
 
