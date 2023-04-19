@@ -148,7 +148,7 @@ app.get("/profile-data", requireLogin, async (req, res) => {
 
 app.get("/profile-details", requireLogin, async (req, res) => {
   try {
-    const profileData = await User.find({});
+    const profileData = await User.find({ _id: currentUserId });
     res.json(profileData);
   } catch (err) {
     console.error(err);
