@@ -61,8 +61,8 @@ window.onload = function() {
 
   $(document).ready(() => {
     $.get("/profile-details", (data) => {
-      // The data variable contains the array of profile documents from the server
-      const profile = data[0]; // Assuming there is only one profile document in the collection
+      //data variable contains array of profiles from server
+      const profile = data[0];
       
       // Update the banner image
       $("#banner_image").attr("src", profile.bannerImage);
