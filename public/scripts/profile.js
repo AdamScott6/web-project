@@ -60,12 +60,12 @@ window.onload = function() {
 
 
   $(document).ready(() => {
-    $.get("/profile-data", (data) => {
+    $.get("/profile-details", (data) => {
       // The data variable contains the array of profile documents from the server
       const profile = data[0]; // Assuming there is only one profile document in the collection
       
       // Update the banner image
-      $("#banner_image").attr("src", profile.bannerImageUrl);
+      $("#banner_image").attr("src", profile.bannerImage);
       
       // Update the profile picture
       $("#profile_pic").attr("src", profile.profilePicture);
@@ -75,23 +75,33 @@ window.onload = function() {
       
       // Update the about me section
       $(".about-me").html(profile.aboutMe);
-
-      // $(".box .latest-posts").html(profile.content);
-      
-      // Update the latest posts section
-      // const postsHtml = profile.posts.map((post) => {
-      //   return `
-      //     <div class="post">
-      //       <p>${post.content}</p>
-      //       <p>${post.date}</p>
-      //     </div>
-      //   `;
-      // }).join("");
-      // $(".latest-posts .box").html(postsHtml);
     });
   });
 
+
+  fetch("/profile-details")
+  .then(response => response.json())
+  .then(profileData => {
+    // Use profileData to display the user's details on the page
+    console.log(profileData);
+  })
+  .catch(error => console.error(error));
+
 //---------------------------
+
+  // Make an AJAX request to the profile-data route
+  fetch("/profile-data")
+    .then((res) => res.json())
+    .then((posts) => {
+      // Loop through the posts and display them in the latest-posts div
+      const latestPostsDiv = document.getElementById("latest-posts");
+      posts.forEach((post) => {
+        const postDiv = document.createElement("div");
+        postDiv.textContent = post.content;
+        latestPostsDiv.appendChild(postDiv);
+      });
+    })
+    .catch((err) => console.error(err));
 
 
 
@@ -102,4 +112,5 @@ function createPost() {
 function cancelPost() {
   document.getElementById("postForm").style.display = "none";
 }
+
 
