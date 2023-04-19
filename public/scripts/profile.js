@@ -82,26 +82,30 @@ window.onload = function() {
   fetch("/profile-details")
   .then(response => response.json())
   .then(profileData => {
-    // Use profileData to display the user's details on the page
+    // use profileData to display users details on the page
     console.log(profileData);
   })
   .catch(error => console.error(error));
 
 //---------------------------
 
-  // Make an AJAX request to the profile-data route
-  fetch("/profile-data")
-    .then((res) => res.json())
-    .then((posts) => {
-      // Loop through the posts and display them in the latest-posts div
-      const latestPostsDiv = document.getElementById("latest-posts");
-      posts.forEach((post) => {
-        const postDiv = document.createElement("div");
-        postDiv.textContent = post.content;
-        latestPostsDiv.appendChild(postDiv);
-      });
-    })
-    .catch((err) => console.error(err));
+  // an ajax request is made to /profile-data
+fetch("/profile-data")
+  .then((res) => res.json())
+  .then((posts) => {
+    //looping through posts which then are displayed in div=latest-posts
+    const latestPostsDiv = document.getElementById("latest-posts");
+    
+    // previous content is cleared
+    latestPostsDiv.innerHTML = "";
+    
+    posts.forEach((post) => {
+      const postDiv = document.createElement("div");
+      postDiv.textContent = post.content;
+      latestPostsDiv.appendChild(postDiv);
+    });
+  })
+  .catch((err) => console.error(err));
 
 
 
