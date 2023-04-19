@@ -32,7 +32,7 @@ form.center {
 }
 
 #username,
-#email,
+#fullname,
 #password,
 #cPassword {
     padding: 10px;

@@ -366,10 +366,12 @@ app.post("/change-password", (req, res) => {
 
 app.post("/create-account", (req, res) => {
     const username = req.body.username;
+    const fullName = req.body.fullName;
     const password = req.body.password;
 
     const newUser = new User({
         username,
+        fullName,
         password,
       });
 

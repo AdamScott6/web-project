@@ -11,6 +11,7 @@ window.onload = function () {
             event.preventDefault();
 
             let username = document.getElementById("username").value;
+            let fullname = document.getElementById("fullname").value;
             let password = document.getElementById("password").value;
             let cpassword = document.getElementById("cPassword").value;
 
@@ -25,7 +26,8 @@ window.onload = function () {
                 $.ajax({
                     url: "/create-account",
                     type: "POST",
-                    data: { username: username, 
+                    data: { username: username,
+                            fullName: fullname,
                             password: password },
                     success: function (data) {
                         window.location.href = 'login.html';
