@@ -76,6 +76,16 @@ app.get('/chats', requireLogin, (req, res) => {
         });
 });
 
+app.get('/chatlog-details', async (req, res) => {
+    try {
+        const chatData = await Messages.find({});
+        // console.log(chatData);
+        res.json(chatData);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+})
 
 app.get("/chats-user-data", async (req, res) => {
   try {

@@ -18,8 +18,12 @@ const app = Vue.createApp({
                 const data = await res.json();
                 this.loadedData = data;
                 console.log("data in chats: ", this.loadedData); 
-                // this.users = this.loadedData.participants;
-                // console.log(this.loadedData.participants);
+                
+                const r = await fetch("/current-user");
+                const d = await r.json();
+                console.log("Setting currentUserId: ", d._id);
+                this.currentUserId = d._id;
+
                 this.mapChats();
             },
             mapChats() {
@@ -88,13 +92,28 @@ const app = Vue.createApp({
                 // var userInfo = { name: name, username: username, pfp: pfp}; 
                 // localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 let userInfo = id; 
-                mapChatLog(userInfo);
+                this.mapChatLog(userInfo);
                 localStorage.setItem('userInfo', userInfo);
                 console.log(userInfo);
                 window.location.href='/chatLog'
             },
             mapChatLog(userInfo) {
-                
+                let chatData;
+                $.get("/chatlog-details", (data) => {
+                    chatData = data;
+                    console.log("this is mapChatLog", chatData);
+                    const foundChat = data.filter((chat) => {
+                        return (
+                            (chat.sender === this.currentUserId && chat.recipient === userInfo) ||
+                            (chat.sender === userInfo && chat.recipient === this.currentUserId)
+                        );
+                    });
+                    if (foundChat.length > 0) {
+                        const foundChatJson = JSON.stringify(foundChat[0]);
+                        console.log("foundchat is ", foundChatJson);
+                        localStorage.setItem('chatInfo', foundChatJson);
+                    }
+                })
             }
         },
         mounted() {

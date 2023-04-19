@@ -1,4 +1,5 @@
 let id, fullname, username, pic;
+let currentUserId;
 window.onload = function() {
     $.get("/chats-user-data", (data) => {
         console.log(data)
@@ -51,6 +52,19 @@ window.onload = function() {
         }
     })
 
+     // const r = fetch("/current-user");
+    // const d = r.json();
+    // console.log("Setting currentUserId: ", d._id);
+    // let currentUserId = d._id;
+
+    
+    fetch('/current-user')
+    .then(response => response.json())
+    .then(data => {
+        currentUserId = data;
+        console.log("Setting currentUserId: ", currentUserId);
+        // Do something with the data
+    })
 
     var userId = localStorage.getItem('userInfo'); 
     console.log("userInfo is: ", userId);
@@ -61,16 +75,21 @@ window.onload = function() {
             fullname = data.fullName;
             username = data.username;
             pic = data.profilePicture;
-            console.log("this is userRes data: ", data);
-            console.log("this is data.name: ", fullname);
             $('.text-chat').text(fullname + " (@" + username + ")");
-            $('.img-avatar').attr('src', pfp);
+            $('.img-avatar').attr('src', pic);
         });
     }
     catch(err) {
         res.status(404).send('User not found');
     }
-    
+    var chatInfo = JSON.parse(localStorage.getItem('chatInfo')); 
+    console.log("chatInfo is: ", chatInfo);
+    if (chatInfo.sender == currentUserId) {
+        // Create message-box right
+    }
+    else if (chatInfo.recipient == currentUserId) {
+        // Create message-box left
+    }
 
 
 }
