@@ -117,4 +117,3 @@ function cancelPost() {
   document.getElementById("postForm").style.display = "none";
 }
 
-
