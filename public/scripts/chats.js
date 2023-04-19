@@ -1,5 +1,4 @@
 let isLight = true;
-// let loadedData;
 
 const app = Vue.createApp({
         data() {
@@ -32,6 +31,7 @@ const app = Vue.createApp({
                         }
                     })
                     this.chatData.push({
+                        _id: chat._id,
                         name: chat.name,
                         user: p
                     }); 
@@ -46,6 +46,7 @@ const app = Vue.createApp({
                 userRes.done((data) => {
                     // console.log(data); 
                     this.userData.push( {
+                        id: data._id,
                         name: data.fullName,
                         username: data.username,
                         pic: data.profilePicture
@@ -87,11 +88,18 @@ const app = Vue.createApp({
                     }
                 })
             },
-            log(name, username, pfp) {
-                var userInfo = { name: name, username: username, pfp: pfp}; 
-                localStorage.setItem('userInfo', JSON.stringify(userInfo));
+            log(id) {
+                // var userInfo = { name: name, username: username, pfp: pfp}; 
+                // localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                let userInfo = id; 
+                mapChatLog(userInfo);
+                localStorage.setItem('userInfo', userInfo);
+                console.log(userInfo);
                 window.location.href='/chatLog'
             },
+            mapChatLog(userInfo) {
+                
+            }
         },
         mounted() {
             this.loadChats(),

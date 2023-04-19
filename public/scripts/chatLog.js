@@ -1,3 +1,4 @@
+let id, fullname, username, pic;
 window.onload = function() {
     $.get("/chats-user-data", (data) => {
         console.log(data)
@@ -50,11 +51,26 @@ window.onload = function() {
         }
     })
 
-    var userInfo = JSON.parse(localStorage.getItem('userInfo')); 
-    let name = userInfo.name; 
-    let username = userInfo.username; 
-    let pfp = userInfo.pfp;
-    // console.log(name, username);
-    $('.text-chat').text(name + " (@" + username + ")");
-    $('.img-avatar').attr('src', pfp);
+
+    var userId = localStorage.getItem('userInfo'); 
+    console.log("userInfo is: ", userId);
+    try {
+        let userRes = $.get(`/users/${userId}`, userId);
+        userRes.done((data) => { 
+            id = data._id;
+            fullname = data.fullName;
+            username = data.username;
+            pic = data.profilePicture;
+            console.log("this is userRes data: ", data);
+            console.log("this is data.name: ", fullname);
+            $('.text-chat').text(fullname + " (@" + username + ")");
+            $('.img-avatar').attr('src', pfp);
+        });
+    }
+    catch(err) {
+        res.status(404).send('User not found');
+    }
+    
+
+
 }
