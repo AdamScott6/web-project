@@ -59,30 +59,26 @@ const app = Vue.createApp({
                     if (typeof(data) != "string"){
                         if (data.isLightMode !== undefined){
                             if (data.isLightMode){
-                                if (document.findElementById("body"))
                                 if ($("body").attr("class").includes("body-dark")){
                                     $("body").removeClass("body-dark");
                                 }
                                 $("body").addClass("body-light");
-            
-                                // if ($("div.card").attr("class").includes("is-dark")){
-                                //     $("div.card").removeClass("is-dark");
+
+                                // if ($("html").attr("class").includes("is-dark")){
+                                //     $("html").removeClass("is-dark");
                                 // }
-                                // $("div.card").addClass("is-light");
+                                // $("html").addClass("is-light");
                             }
                             else{
                                 if ($("body").attr("class").includes("body-light")){
                                     $("body").removeClass("body-light");
                                 }
                                 $("body").addClass("body-dark");
-            
-                                // for (div of $("div.card")){
-                                //     console.log(div);
-                                //     if ($(this).attr("class").includes("is-light")){
-                                //         $(this).removeClass("isLight");
-                                //     }
-                                //     $(this).addClass("is-dark");
+
+                                // if ($("html").attr("class").includes("is-light")){
+                                //     $("html").removeClass("is-light");
                                 // }
+                                // $("html").addClass("is-dark");
                             }
                         }
                     }

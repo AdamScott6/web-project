@@ -11,6 +11,18 @@
     --text-color-dark: white;
 }
 
+/* html.is-light{
+    background-color: var(--light-background);
+}
+
+html.is-dark{
+    background-color: var(--dark-background);
+} */
+
+html{
+    overflow: auto;
+}
+
 nav{
     border-style: solid;
     border-color: black;
@@ -33,16 +45,19 @@ a.page_label:hover {
 
 #body {
     padding-top: 7vh;
+    overflow: auto;
 }
 
 body.body-light {
-    padding-top: 7vh;
     background-color: var(--light-background);
 }
 
 body.body-dark {
-    padding-top: 7vh;
     background-color: var(--dark-background);
+}
+
+#app{
+    height: 100vh
 }
 
 div.is-light {
@@ -201,6 +216,7 @@ div.is-dark {
     justify-content: left;
     backdrop-filter: blur(10px);
     transition: 0.5s ease-in-out;
+    background-color: var(--tile-background-dark);
 }
 
 .card:hover {
@@ -224,7 +240,7 @@ div.is-dark {
 .textBox {
     width: calc(100% - 90px);
     margin-left: 10px;
-    color: black;
+    color: white;
     font-family: 'Poppins' sans-serif;
 }
 
