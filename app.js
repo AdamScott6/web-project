@@ -201,6 +201,28 @@ app.post("/add-post", requireLogin, (req, res) => {
     });
 });
 
+
+
+app.post("/update-bio", (req, res) => {
+  const userId = currentUserId;
+  const { aboutMe } = req.body;
+
+  User.findByIdAndUpdate(
+    userId,
+    { $set: { aboutMe } },
+    { new: true }
+  )
+    .then((updatedBio) => {
+      res.json(updatedBio);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Internal server error");
+    });
+});
+
+
+
 //------------------------
 app.get('/settings', (req, res) => {
     User.find({})
