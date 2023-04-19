@@ -1,3 +1,16 @@
+:root {
+    --dark-background: rgb(77, 77, 77);
+    --light-background: white;
+
+    --foreground-light: black;
+    --tile-background-light: white;
+    --text-color-light: black;
+
+    --foreground-dark: white;
+    --tile-background-dark: gray;
+    --text-color-dark: white;
+}
+
 nav{
     border-style: solid;
     border-color: black;
@@ -18,8 +31,28 @@ a.page_label:hover {
     background-color: white;
 }
 
-#body{
+#body {
     padding-top: 7vh;
+}
+
+body.body-light {
+    padding-top: 7vh;
+    background-color: var(--light-background);
+}
+
+body.body-dark {
+    padding-top: 7vh;
+    background-color: var(--dark-background);
+}
+
+div.is-light {
+    color: var(--foreground-light);
+    background-color: var(--light-background);
+}
+
+div.is-dark {
+    color: var(--foreground-dark);
+    background-color: var(--light-background);
 }
 
 .form {

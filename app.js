@@ -42,12 +42,35 @@ app.get('/home', (req, res) => {
         });
 });
 
+// Current User Data for home.html
+app.get("/home-user-data", (req, res) => {
+    User.findById(currentUserId)
+        .then((result) => {
+            console.log(result)
+            res.send(result);
+        })
+        .catch((error) => {
+            res.status(500).send('Internal server error');
+        });
+})
+
 app.get('/chats', (req, res) => {
     User.find({})
         .then((profiles) => {
             res.sendFile(__dirname + "/public/chats.html");
         });
 });
+
+app.get("/chats-user-data", (req, res) => {
+    User.findById(currentUserId)
+        .then((result) => {
+            console.log(result)
+            res.send(result);
+        })
+        .catch((error) => {
+            res.status(500).send('Internal server error');
+        });
+})
 
 // User routes
 // GET call for current user (hardcoded user)

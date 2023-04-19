@@ -1,3 +1,16 @@
+:root {
+    --dark-background: rgb(77, 77, 77);
+    --light-background: white;
+
+    --foreground-light: black;
+    --tile-background-light: white;
+    --text-color-light: black;
+
+    --foreground-dark: white;
+    --tile-background-dark: #333;
+    --text-color-dark: white;
+}
+
 nav{
     border-style: solid;
     border-color: black;
@@ -20,6 +33,40 @@ a.page_label:hover {
 
 #body{
     padding-top: 7vh;
+}
+
+body.body-light {
+    padding-top: 7vh;
+    background-color: var(--light-background);
+}
+
+body.body-dark {
+    padding-top: 7vh;
+    background-color: var(--dark-background);
+}
+
+div.is-light{
+    background-color: var(--light-background);
+}
+
+div.is-dark{
+    background-color: var(--dark-background);
+}
+
+div.header-is-light{
+    background-color: var(--tile-background-light);
+}
+
+div.header-is-dark{
+    background-color: var(--tile-background-dark);
+}
+
+div.header-label-light{
+    color: black;
+}
+
+div.header-label-dark{
+    color: white;
 }
 
 .card-container {
@@ -78,7 +125,6 @@ a.page_label:hover {
 }
 
 .card-header .text-chat {
-    color: black;
     margin: 0;
     font-size: 20px;
 }

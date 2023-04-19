@@ -10,7 +10,9 @@ window.onload = function () {
 
         console.log(currentAccount);
         if (currentAccount !== undefined){
-            isLight = currentAccount["isLightMode"];
+            if (currentAccount["isLightMode"] !== undefined){
+                isLight = currentAccount["isLightMode"];
+            }
         }
         initializeTheme();
 

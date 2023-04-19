@@ -18,6 +18,19 @@ section:nth-child(even).show, .show{
     transform: translateX(0%);
 }
 
+:root {
+    --dark-background: rgb(77, 77, 77);
+    --light-background: white;
+
+    --foreground-light: black;
+    --tile-background-light: white;
+    --text-color-light: black;
+
+    --foreground-dark: white;
+    --tile-background-dark: gray;
+    --text-color-dark: white;
+}
+
 nav{
     height: 7vh;
     display: flex;
@@ -33,6 +46,11 @@ div#navigation {
     background-color: hsl(0, 0%, 21%);
 }
 
+#body {
+    background-color: black;
+    padding-top: 7vh;
+}
+
 a.page_label {
     color: white;
 }
@@ -42,11 +60,9 @@ a.page_label:hover {
     background-color: white;
 }
 
-#body{
-    padding-top: 7vh;
-}
 .page{
-    background-color: #690000;
+    /* background-color: #690000; */
+    background-color: blue;
 }
 
 /* -------------Post------------- */
@@ -74,6 +90,7 @@ section:nth-child(even) {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+
 /*
 section:nth-child(odd) .header {
     justify-content: right;

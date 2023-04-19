@@ -43,7 +43,6 @@ body.body-dark {
     background-color: var(--dark-background);
 }
 
-
 form.center {
     display: flex;
     flex-direction: column;

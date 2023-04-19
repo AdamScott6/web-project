@@ -1,5 +1,4 @@
-
-
+let isLight = true;
 
 const app = Vue.createApp({
         data() {
@@ -37,15 +36,50 @@ const app = Vue.createApp({
                 // console.log("userData");
                 // console.log(this.userData);
             },
+            async initializeTheme() {
+                $.get("/settings-data", (data) => {
+                    if (typeof(data) != "string"){
+                        if (data.isLightMode !== undefined){
+                            if (data.isLightMode){
+                                if (document.findElementById("body"))
+                                if ($("body").attr("class").includes("body-dark")){
+                                    $("body").removeClass("body-dark");
+                                }
+                                $("body").addClass("body-light");
+            
+                                // if ($("div.card").attr("class").includes("is-dark")){
+                                //     $("div.card").removeClass("is-dark");
+                                // }
+                                // $("div.card").addClass("is-light");
+                            }
+                            else{
+                                if ($("body").attr("class").includes("body-light")){
+                                    $("body").removeClass("body-light");
+                                }
+                                $("body").addClass("body-dark");
+            
+                                // for (div of $("div.card")){
+                                //     console.log(div);
+                                //     if ($(this).attr("class").includes("is-light")){
+                                //         $(this).removeClass("isLight");
+                                //     }
+                                //     $(this).addClass("is-dark");
+                                // }
+                            }
+                        }
+                    }
+                })
+            },
             log(name, username, pfp) {
                 var userInfo = { name: name, username: username, pfp: pfp}; 
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 window.location='chatLog.html'
-            },            
+            },
         },
         mounted() {
             this.loadUsers(),
-            this.loadPictures()
+            this.loadPictures(),
+            this.initializeTheme()
         },
     computed: {
         GetUsers: function () {

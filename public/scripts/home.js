@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let i = 0; i < data.length; i++) {
                 let  value = data[i];
                 let  section = document.createElement('section');
+
                 section.classList.add("post", "hidden");
 
                 let  header = document.createElement('div');
@@ -62,3 +63,31 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.log(error));
 
 });
+
+let isLight = true;
+
+$(document).ready(function () {
+    $.get("/home-user-data", (data) => {
+        if (data !== undefined){
+            if (data["isLightMode"] !== undefined){
+                isLight = data["isLightMode"];
+            }
+        }
+        // initializeTheme();
+    });
+});
+
+function initializeTheme(){
+    if (isLight){
+        if ($("body").attr("class").includes("body-dark")){
+            $("body").removeClass("body-dark");
+        }
+        $("body").addClass("body-light");
+    }
+    else{
+        if ($("body").attr("class").includes("body-light")){
+            $("body").removeClass("body-light");
+        }
+        $("body").addClass("body-dark");
+    }
+}
