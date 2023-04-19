@@ -71,7 +71,12 @@ window.onload = function() {
       $("#profile_pic").attr("src", profile.profilePicture);
       
       // update the name and handle
-      $(".text").html(`${profile.fullName} <br> @${profile.username}`);
+      if (profile.fullName !== undefined){
+        $(".text").html(`${profile.fullName} <br> @${profile.username}`);
+      }
+      else{
+        $(".text").html(`${profile.username} <br> @${profile.username}`);
+      }
       
       // update the about me section
       $(".about-me").html(profile.aboutMe);
