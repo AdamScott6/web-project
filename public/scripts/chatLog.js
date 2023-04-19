@@ -1,7 +1,7 @@
 let id, fullname, username, pic;
-let currentUserId;
+let currentUserId, currentChatlog;
 window.onload = function() {
-    $.get("/current-user", (data) => {
+    $.get("/chats-user-data", (data) => {
         console.log(data)
         if (typeof(data) != "string"){
             if (data.isLightMode !== undefined){
@@ -52,10 +52,7 @@ window.onload = function() {
         }
     })
 
-     // const r = fetch("/current-user");
-    // const d = r.json();
-    // console.log("Setting currentUserId: ", d._id);
-    // let currentUserId = d._id;
+     
 
     
     fetch('/current-user')
@@ -63,7 +60,6 @@ window.onload = function() {
     .then(data => {
         currentUserId = data;
         console.log("Setting currentUserId: ", currentUserId);
-        // Do something with the data
     })
 
     var userId = localStorage.getItem('userInfo'); 
@@ -82,13 +78,40 @@ window.onload = function() {
     catch(err) {
         res.status(404).send('User not found');
     }
-    var chatInfo = JSON.parse(localStorage.getItem('chatInfo')); 
+    
+    var chatInfo = JSON.parse(localStorage.getItem('chatInfo'));
     console.log("chatInfo is: ", chatInfo);
-    if (chatInfo.sender == currentUserId) {
-        // Create message-box right
+    let chatID = chatInfo.chatID;
+    console.log("chatInfo.chatID is: ", chatID);
+    try {
+        let chatRes = $.get(`/chatlog/${chatID}`, chatID);
+        chatRes.done((data) => { 
+            currentChatlog = data;
+            console.log("data is: ", data);
+            console.log("chatlog is", currentChatlog);
+        });
     }
-    else if (chatInfo.recipient == currentUserId) {
-        // Create message-box left
+    catch(err) {
+        console.log("chatlog was not  found");
+        res.status(404).send('Chatlog not found');
+    }
+    console.log("chatlog is ", currentChatlog);
+    console.log("chatInfo.sender is: ", chatInfo.sender, "current user is: ", userId);
+    if (chatInfo.sender === userId) {
+        console.log("sender is current user!");
+        var newMessage = $('<div>').addClass('.message-box right');
+        let str = "<p>" + chatInfo.message + "</p>";
+        newMessage.append(str);
+
+        $('.messages-container').append(newMessage);
+    }
+    else if (chatInfo.recipient === userId) {
+        console.log("recipient is current user!");
+        var newMessage = $('<div>').addClass('.message-box left');
+        let str = "<p>" + chatInfo.message + "</p>";
+        newMessage.append(str);
+
+        $('.messages-container').append(newMessage);
     }
 
 

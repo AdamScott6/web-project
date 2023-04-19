@@ -89,8 +89,6 @@ const app = Vue.createApp({
                 })
             },
             log(id) {
-                // var userInfo = { name: name, username: username, pfp: pfp}; 
-                // localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 let userInfo = id; 
                 this.mapChatLog(userInfo);
                 localStorage.setItem('userInfo', userInfo);

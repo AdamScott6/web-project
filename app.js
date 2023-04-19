@@ -94,19 +94,18 @@ app.get("/chats-user-data", async (req, res) => {
             // console.log("result is: ", result);
             res.json(result);
         })
-
-   
-    //Works but is sender is hardcoded 
-    // Messages.find({sender: new ObjectId('64386af3beef1a0be1a26b85')})
-    //     .then((result) => {
-    //         console.log(result)
-    //         res.json(result);
-    //     })
-
-    // res.json(chats);
   } catch (err) {
     console.log("Error:", err.message);
     res.status(500).json();
+  }
+});
+app.get('/chatlog/:chatID', async (req, res) => {
+  try {
+    const chats = await Messages.find({ chatId: req.params.chatID });
+    console.log(chats);
+    res.json(chats);
+  } catch (err) {
+    res.status(404).send('User not found');
   }
 });
 
@@ -115,7 +114,6 @@ app.get('/users/:userId', async (req, res) => {
   try {
     // console.log("req.params.userId is ",req.params.userId);  
     const user = await User.findById(req.params.userId);
-    console.log("sending to chat: ", user);
     res.json(user);
   } catch (err) {
     res.status(404).send('User not found');
