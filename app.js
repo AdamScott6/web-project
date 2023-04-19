@@ -3,6 +3,7 @@ let express = require("express");
 let mongoose = require("mongoose");
 const User = require("./models/user");
 const Post = require("./models/post.js");
+const Chatslist = require("./models/chatslist");
 let currentUserId = -1;
 
 // Instantiate express application
@@ -68,20 +69,20 @@ app.get("/home-user-data", requireLogin, (req, res) => {
 
 app.get('/chats', requireLogin, (req, res) => {
     User.find({})
-        .then((profiles) => {
+        .then(() => {
             res.sendFile(__dirname + "/public/chats.html");
         });
 });
 
-app.get("/chats-user-data", requireLogin, (req, res) => {
-    User.findById(currentUserId)
-        .then((result) => {
-            console.log(result)
-            res.send(result);
-        })
-        .catch((error) => {
-            res.status(500).send('Internal server error');
-        });
+app.get("/chats-user-data", (req, res) => {
+    try {
+        const chats = Chatslist.find({ participants: currentUserId });
+        console.log(chats);
+        res.json(chats);
+  } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+  }
 })
 
 // User routes
@@ -330,3 +331,6 @@ app.post("/logout-function", (req, res) => {
     currentUserId = -1;
     res.send('User has logged out')
 });
+
+//------------------------
+// Chats
