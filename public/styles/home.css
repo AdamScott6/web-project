@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+:root {
+    --dark-background: rgb(77, 77, 77);
+    --light-background: white;
+
+    --foreground-light: black;
+    --tile-background-light: white;
+    --text-color-light: black;
+
+    --foreground-dark: white;
+    --tile-background-dark: gray;
+    --text-color-dark: white;
+}
+
 .hidden{
     opacity: 0;
     filter: blur(5px);
@@ -18,19 +31,6 @@ section:nth-child(even).show, .show{
     transform: translateX(0%);
 }
 
-:root {
-    --dark-background: rgb(77, 77, 77);
-    --light-background: white;
-
-    --foreground-light: black;
-    --tile-background-light: white;
-    --text-color-light: black;
-
-    --foreground-dark: white;
-    --tile-background-dark: gray;
-    --text-color-dark: white;
-}
-
 nav{
     height: 7vh;
     display: flex;
@@ -47,8 +47,17 @@ div#navigation {
 }
 
 #body {
-    background-color: black;
     padding-top: 7vh;
+}
+
+body.body-light {
+    padding-top: 7vh;
+    background-color: var(--light-background);
+}
+
+body.body-dark {
+    padding-top: 7vh;
+    background-color: var(--dark-background);
 }
 
 a.page_label {
@@ -60,9 +69,14 @@ a.page_label:hover {
     background-color: white;
 }
 
-.page{
-    /* background-color: #690000; */
-    background-color: blue;
+div.page-is-light{
+    height: auto;
+    color: var(--light-background);
+}
+
+div.page-is-dark{
+    overflow: hidden;
+    color: var(--dark-background);
 }
 
 /* -------------Post------------- */
