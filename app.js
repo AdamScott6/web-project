@@ -100,7 +100,7 @@ app.get("/chats-user-data", async (req, res) => {
   }
 });
 
-
+// Get User document using userID
 app.get('/users/:userId', async (req, res) => {
   try {
     // console.log("req.params.userId is ",req.params.userId);  
@@ -111,6 +111,13 @@ app.get('/users/:userId', async (req, res) => {
     res.status(404).send('User not found');
   }
 });
+
+app.get('/chatlog', async (req, res) => {
+    User.find({})
+        .then(() => {
+            res.sendFile(__dirname + "/public/chatLog.html");
+        });
+})
 
 // User routes
 // GET call for current user (hardcoded user)
