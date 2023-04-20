@@ -247,6 +247,36 @@ app.post("/update-bio", (req, res) => {
 
 
 
+
+// this saves banner url to db
+app.post('/saveBannerImage', requireLogin, (req, res) => {
+  const bannerImageURL = req.body.banner_image_url;
+  User.findByIdAndUpdate(currentUserId, { bannerImageURL })
+    .then(() => {
+      res.redirect('/profile');
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Internal server error');
+    });
+});
+
+// this saves profile pic url to db
+app.post('/saveProfileImage', requireLogin, (req, res) => {
+  const profilePicURL = req.body.profile_pic_url;
+  User.findByIdAndUpdate(currentUserId, { profilePicURL })
+    .then(() => {
+      res.redirect('/profile');
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Internal server error');
+    });
+});
+
+
+
+
 //------------------------
 app.get('/settings', (req, res) => {
     User.find({})

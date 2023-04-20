@@ -41,16 +41,25 @@
 
 
 <div id="mainBody">
-        <div class="banner" title="Click to change banner image">
-          <input type="file" id="banner_input" style="display: none;">
+    
+    
+        <div class="banner" title="Change banner image with a URL">
+          <form action="/saveBannerImage" method="POST">
+            <label for="banner_image_url">Banner URL:</label>
+            <input type="text" id="banner_image_url" name="banner_image_url">
+            <button type="submit">Save Banner</button>
+          </form>
           <img src="images/test.png" id="banner_image">
         </div>
 
-
-        <div class="profile-pic-container" title="Click to change profile image">
-          <input type="file" id="profile_input" style="display: none;">
-          <img src="images/default.svg" id="profile_pic">
-        </div>
+        <div class="profile-pic-container" title="Change profile image with a URL">
+            <img src="images/default.svg" id="profile_pic">
+          <form action="/saveProfileImage" method="POST">
+            <label for="profile_pic_url">Profile URL:</label>
+            <input type="text" id="profile_pic_url" name="profile_pic_url">
+            <button type="submit">Save Profile</button>
+          </form>
+          
 
 
         <div class="text">
