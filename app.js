@@ -78,8 +78,7 @@ app.get('/chats', requireLogin, (req, res) => {
 
 app.get('/chatlog-details', async (req, res) => {
     try {
-        const chatData = await Messages.find({});
-        // console.log(chatData);
+        const chatData = await Messages.find({});;
         res.json(chatData);
     } catch (err) {
         console.error(err);
@@ -91,7 +90,6 @@ app.get("/chats-user-data", async (req, res) => {
   try {
     Chatslist.find({participants: { $in: new ObjectId(currentUserId) }})
         .then((result) => {
-            // console.log("result is: ", result);
             res.json(result);
         })
   } catch (err) {
@@ -103,7 +101,6 @@ app.get("/chats-user-data", async (req, res) => {
 app.get('/chatlog/:chatID', async (req, res) => {
   try {
     const chats = await Messages.find({ chatID: new ObjectId(req.params.chatID)});
-    console.log("chats is ", chats);
     res.json(chats);
   } catch (err) {
     res.status(404).send('User not found');
@@ -133,12 +130,13 @@ app.post("/add-message", (req, res) => {
     const sender = req.body.sender;
     const recipient = req.body.recipient;
     const message = req.body.message;
+    console.log("chatID is: ", chatID, "sender is", sender);
 
     const newMessage = new Messages({
-        chatID,
-        sender,
-        recipient,
-        message, 
+        chatId: chatID,
+        sender: sender,
+        recipient: recipient,
+        message: message, 
       });
 
       newMessage.save()
