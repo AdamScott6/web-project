@@ -108,7 +108,8 @@ app.get('/chatlog/:chatID', async (req, res) => {
         result.push(doc)
       }
     }
-    res.json(result);
+    // res.json(result);
+    res.json(chats);
   } catch (err) {
     res.status(404).send('User not found');
   }
