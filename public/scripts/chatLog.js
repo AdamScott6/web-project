@@ -64,12 +64,28 @@ window.onload = function() {
 
      
 
-    
+  
     fetch('/current-user')
     .then(response => response.json())
     .then(data => {
         currentUserId = data;
         console.log("Setting currentUserId: ", currentUserId);
+        var chatInfo = JSON.parse(localStorage.getItem('chatInfo'));
+        // console.log("chatInfo is: ", chatInfo);
+        let chatID = chatInfo.chatID;
+        // console.log("chatInfo.chatID is: ", chatID);
+        try {
+            let chatRes = $.get(`/chatlog/${chatID}`, chatID);
+            chatRes.done((data) => { 
+                currentChatlog = data;
+                console.log("chatlog is", currentChatlog);
+                displayMessages(currentChatlog);
+            });
+        }
+        catch(err) {
+            console.log("chatlog was not  found");
+            res.status(404).send('Chatlog not found');
+        }
     })
 
     userId = localStorage.getItem('userInfo'); 
@@ -89,22 +105,7 @@ window.onload = function() {
         res.status(404).send('User not found');
     }
     
-    var chatInfo = JSON.parse(localStorage.getItem('chatInfo'));
-    console.log("chatInfo is: ", chatInfo);
-    let chatID = chatInfo.chatID;
-    console.log("chatInfo.chatID is: ", chatID);
-    try {
-        let chatRes = $.get(`/chatlog/${chatID}`, chatID);
-        chatRes.done((data) => { 
-            currentChatlog = data;
-            console.log("chatlog is", currentChatlog);
-            displayMessages(currentChatlog);
-        });
-    }
-    catch(err) {
-        console.log("chatlog was not  found");
-        res.status(404).send('Chatlog not found');
-    }
+    
     console.log("currentChatLog outside of foreach ", currentChatlog);
     $('#button-send').click(function() {
         // currentChatlog[0]
@@ -114,7 +115,7 @@ window.onload = function() {
     
 }
 
-function displayMessages(currentChatLog) {
+function displayMessages(currentChatlog) {
     $.each(currentChatlog, function(index, message) {
         console.log("message.sender is: ", message.sender, "current user is: ", userId);
         if (message.sender === userId) {
