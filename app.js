@@ -101,7 +101,14 @@ app.get("/chats-user-data", async (req, res) => {
 app.get('/chatlog/:chatID', async (req, res) => {
   try {
     const chats = await Messages.find({ chatID: new ObjectId(req.params.chatID)});
-    res.json(chats);
+    let result = []
+    const cursor = Messages.find().cursor();
+    for (let doc = await cursor.next(); doc != null; doc = await cursor.next()){
+      if (doc.chatId == req.params.chatID){
+        result.push(doc)
+      }
+    }
+    res.json(result);
   } catch (err) {
     res.status(404).send('User not found');
   }
@@ -139,9 +146,11 @@ app.post("/add-message", (req, res) => {
         message: message, 
       });
 
+      console.log(newMessage);
+
       newMessage.save()
       .then(() => {
-        
+        console.log("saved");
       })
       .catch((error) => {
         console.log(error);

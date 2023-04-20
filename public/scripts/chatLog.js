@@ -76,6 +76,7 @@ window.onload = function() {
         try {
             let chatRes = $.get(`/chatlog/${chatID}`, chatID);
             chatRes.done((data) => { 
+                console.log(chatRes);
                 currentChatlog = data;
                 console.log("chatlog is", currentChatlog);
                 displayMessages(currentChatlog);
