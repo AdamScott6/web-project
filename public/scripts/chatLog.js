@@ -115,6 +115,7 @@ window.onload = function() {
 }
 
 function displayMessages(currentChatLog) {
+    console.log(currentChatLog)
     $.each(currentChatlog, function(index, message) {
         console.log("message.sender is: ", message.sender, "current user is: ", userId);
         if (message.sender === userId) {
@@ -185,7 +186,7 @@ function send() {
 
     newMessageContainer.appendChild(newMessage);
     const messagesContainer = document.querySelector('#card-body');
-    messagesContainer.appendChild(newMessageContainer);
+    messagesContainer.insertBefore(newMessageContainer, document.querySelector(".message-input"));
 
 
     $('.message-send').val('');
