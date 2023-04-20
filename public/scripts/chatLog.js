@@ -188,6 +188,5 @@ function send() {
     const messagesContainer = document.querySelector('#card-body');
     messagesContainer.insertBefore(newMessageContainer, document.querySelector(".message-input"));
 
-
     $('.message-send').val('');
 }
