@@ -145,21 +145,23 @@ function displayMessages(currentChatlog) {
 
 function send() {
     let messageSend = $('.message-send').val();
-    let recipientUser;
+    let recipientUser, senderUser;
     console.log("currentChatLog from send(): ", currentChatlog);
     let c = currentChatlog[0];
     console.log("chatID: ", c.chatID, " sender", c.sender);
     if (c.recipient == userId){
-        recipientUser = c.sender;
+        recipientUser = c.recipient;
+        senderUser = c.sender;
     }
     else {
-        recipientUser = c.recipient;
+        recipientUser = c.sender;
+        senderUser = c.recipient;
     }
     $.ajax({
         url: "/add-message",
         type: "POST",
         data: { chatID: c.chatID,
-                sender: userId,
+                sender: senderUser,
                 recipient: recipientUser,
                 message: messageSend,  
             },
