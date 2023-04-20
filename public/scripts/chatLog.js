@@ -1,5 +1,5 @@
 let id, fullname, username, pic;
-let currentUserId, currentChatlog;
+let currentChatlog, userId;
 window.onload = function() {
     $.get("/current-user", (data) => {
         console.log(data)
@@ -72,7 +72,7 @@ window.onload = function() {
         console.log("Setting currentUserId: ", currentUserId);
     })
 
-    var userId = localStorage.getItem('userInfo'); 
+    userId = localStorage.getItem('userInfo'); 
     console.log("userInfo is: ", userId);
     try {
         let userRes = $.get(`/users/${userId}`, userId);
@@ -97,57 +97,71 @@ window.onload = function() {
         let chatRes = $.get(`/chatlog/${chatID}`, chatID);
         chatRes.done((data) => { 
             currentChatlog = data;
-            // console.log("data is: ", data);
             console.log("chatlog is", currentChatlog);
-            $.each(currentChatlog, function(index, message) {
-                console.log("message.sender is: ", message.sender, "current user is: ", userId);
-                if (message.sender === userId) {
-                    const newMessage = document.createElement('div');
-                    newMessage.classList.add('message-box', 'right');
-
-                    const messageContent = document.createElement('p');
-                    messageContent.innerHTML = message.message;
-                    newMessage.appendChild(messageContent);
-
-                    const messagesContainer = document.querySelector('.messages-container');
-                    messagesContainer.appendChild(newMessage);
-                }
-                else if (message.recipient === userId) {
-                    console.log("recipient is current user!");
-                    const newMessage = document.createElement('div');
-                    newMessage.classList.add('message-box', 'left');
-
-                    const messageContent = document.createElement('p');
-                    messageContent.innerHTML = message.message;
-                    newMessage.appendChild(messageContent);
-
-                    const messagesContainer = document.querySelector('.messages-container');
-                    messagesContainer.appendChild(newMessage);
-                }
-            });
-            $('#button-send').click(function() {
-                send(currentChatlog);
-            });
+            displayMessages(currentChatlog);
         });
     }
     catch(err) {
         console.log("chatlog was not  found");
         res.status(404).send('Chatlog not found');
     }
-
+    console.log("currentChatLog outside of foreach ", currentChatlog);
+    $('#button-send').click(function() {
+        // currentChatlog[0]
+        // Object.values(currentChatlog)[0]
+        send();
+    });
     
 }
 
-function send(currentChatlog) {
-    let messageSend = $('.message-send').val();
+function displayMessages(currentChatLog) {
+    $.each(currentChatlog, function(index, message) {
+        console.log("message.sender is: ", message.sender, "current user is: ", userId);
+        if (message.sender === userId) {
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('message-box', 'right');
 
+            const messageContent = document.createElement('p');
+            messageContent.innerHTML = message.message;
+            newMessage.appendChild(messageContent);
+
+            const messagesContainer = document.querySelector('.messages-container');
+            messagesContainer.appendChild(newMessage);
+        }
+        else if (message.recipient === userId) {
+            console.log("recipient is current user!");
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('message-box', 'left');
+
+            const messageContent = document.createElement('p');
+            messageContent.innerHTML = message.message;
+            newMessage.appendChild(messageContent);
+
+            const messagesContainer = document.querySelector('.messages-container');
+            messagesContainer.appendChild(newMessage);
+        }
+    });
+}
+
+function send() {
+    let messageSend = $('.message-send').val();
+    let recipientUser;
+    console.log("currentChatLog from send(): ", currentChatlog);
+    let c = currentChatlog[0];
+    console.log("chatID: ", c.chatID, " sender", c.sender);
+    if (c.recipient == userId){
+        recipientUser = c.sender;
+    }
+    else {
+        recipientUser = c.recipient;
+    }
     $.ajax({
         url: "/add-message",
         type: "POST",
-        data: { chatID: currentChatlog.chatID,
-                sender: currentChatlog.sender,
-                recipient: currentChatlog.recipient,
-                message: currentChatlog.message,  
+        data: { chatID: c.chatID,
+                sender: userId,
+                recipient: recipientUser,
+                message: messageSend,  
             },
         success: function (data) {
             console.log("Sent to /add-message");
