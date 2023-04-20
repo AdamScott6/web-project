@@ -102,21 +102,31 @@ window.onload = function() {
             $.each(currentChatlog, function(index, message) {
                 console.log("message.sender is: ", message.sender, "current user is: ", userId);
                 if (message.sender === userId) {
-                    console.log("sender is current user!");
-                    let newMessage = $('<div>').addClass('message-box right');
-                    let str = "<p>" + message.message + "</p>";
-                    newMessage.append(str);
+                    const newMessage = document.createElement('div');
+                    newMessage.classList.add('message-box', 'right');
 
-                    $('.messages-container').append(newMessage);
+                    const messageContent = document.createElement('p');
+                    messageContent.innerHTML = message.message;
+                    newMessage.appendChild(messageContent);
+
+                    const messagesContainer = document.querySelector('.messages-container');
+                    messagesContainer.appendChild(newMessage);
                 }
                 else if (message.recipient === userId) {
                     console.log("recipient is current user!");
-                    let newMessage = $('<div>').addClass('message-box left');
-                    let str = "<p>" + message.message + "</p>";
-                    newMessage.append(str);
+                    const newMessage = document.createElement('div');
+                    newMessage.classList.add('message-box', 'left');
 
-                    $('.messages-container').append(newMessage);
+                    const messageContent = document.createElement('p');
+                    messageContent.innerHTML = message.message;
+                    newMessage.appendChild(messageContent);
+
+                    const messagesContainer = document.querySelector('.messages-container');
+                    messagesContainer.appendChild(newMessage);
                 }
+            });
+            $('#button-send').click(function() {
+                send(currentChatlog);
             });
         });
     }
@@ -125,14 +135,40 @@ window.onload = function() {
         res.status(404).send('Chatlog not found');
     }
 
-    $('#button-send').click(function() {
-        send();
-    });
+    
 }
 
-function send() {
+function send(currentChatlog) {
     let messageSend = $('.message-send').val();
-    $('.messages-container').append($('<div>').addClass('message-box right').append(messageSend));
-    $('.message-send').val('');
+
+    $.ajax({
+        url: "/add-message",
+        type: "POST",
+        data: { chatID: currentChatlog.chatID,
+                sender: currentChatlog.sender,
+                recipient: currentChatlog.recipient,
+                message: currentChatlog.message,  
+            },
+        success: function (data) {
+            console.log("Sent to /add-message");
+            window.location.href = 'chatLog.html';
+        },
+        error: function (error) {
+            console.log(error);
+            alert("Error creating account");
+        },
+    });
     
+    const newMessage = document.createElement('div');
+    newMessage.classList.add('message-box', 'right');
+
+    const messageContent = document.createElement('p');
+    messageContent.innerHTML = messageSend;
+    newMessage.appendChild(messageContent);
+
+    const messagesContainer = document.querySelector('.messages-container');
+    messagesContainer.appendChild(newMessage);
+
+
+    $('.message-send').val('');
 }

@@ -128,6 +128,29 @@ app.get('/chatlog', async (req, res) => {
         });
 })
 
+app.post("/add-message", (req, res) => {
+    const chatID = req.body.chatID;
+    const sender = req.body.sender;
+    const recipient = req.body.recipient;
+    const message = req.body.message;
+
+    const newMessage = new Messages({
+        chatID,
+        sender,
+        recipient,
+        message, 
+      });
+
+      newMessage.save()
+      .then(() => {
+
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send("Internal server error");
+      });
+});
+
 // User routes
 // GET call for current user (hardcoded user)
 app.get('/current-user', requireLogin, (req, res) => {
