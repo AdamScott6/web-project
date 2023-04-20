@@ -21,48 +21,82 @@
         <div class="navbar-menu"></div>
         <div class="navbar-end">
             <div class="navbar-item">
-                <img id="site_logo" src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8=" alt="Site Logo">
+                <img id="site_logo"
+                    src="https://media.istockphoto.com/id/1161352480/vector/sample-sign-sample-square-speech-bubble-sample.jpg?s=612x612&w=0&k=20&c=qZ480B32q1qGLxoTZEaXcxDB4BMCMDGAGnDQ0hEJ_I8="
+                    alt="Site Logo">
             </div>
         </div>
     </nav>
 
     <div id="navigation" class="tabs">
         <ul>
-          <li id="homePage"><a class="page_label" href="home">Home</a></li>
-          <li id="profilePage"><a class="page_label" href="profile">Profile</a></li>
-          <li id="chatsPage"><a class="page_label" href="chats">Chats</a></li>
-          <li id="accountPage" class="is-active"><a class="page_label" href="login">Account</a></li>
-          <li id="settingsPage"><a class="page_label" href="settings">Settings</a></li>
+            <li id="homePage"><a class="page_label" href="home">Home</a></li>
+            <li id="profilePage"><a class="page_label" href="profile">Profile</a></li>
+            <li id="chatsPage"><a class="page_label" href="chats">Chats</a></li>
+            <li id="accountPage" class="is-active"><a class="page_label" href="login">Account</a></li>
+            <li id="settingsPage"><a class="page_label" href="settings">Settings</a></li>
         </ul>
     </div>
 
-    <form id = "mainBody" action="login.html" class="center">
+    <form id="mainBody" action="login.html" class="center">
         <img id="profilePicture" src="lib/default.jpg" class="avatar">
 
-        <label id = "username"></label>
+        <label id="username"></label>
 
-        <input id="signOut" type="submit" value="Sign Out">
+        <input id="signOut" class="cancel" type="submit" value="Sign Out">
     </form>
 
-    <form id = "changeUsername" class="center">
-        <input type="text" placeholder="Enter New Username" id="newUsername" name="newUsername" required>
-        <input type="submit" value="Change Username" id="changeUsernameButton">
-    </form>
+        <input type="button" class="change" value="Change Username" id="changeUsernameButton">
 
-    <form id = "changeFullName" class="center">
-        <input type="text" placeholder="Enter New Name" id="newFullName" name="newFullName" required>
-        <input type="submit" value="Change FullName" id="changeFullNameButton">
-    </form>
+        <div id="usernameModal" class="modal">
+            <div class="modal-content">
+                <form id="changeUsernameModal" class="center">
+                    <input type="text" placeholder="Enter New Username" id="newUsername" name="newUsername" required>
+                    <input type="submit" class="confirm" value="Confirm">
+                    <input type="button" class="cancel" value="Cancel" id="cancelUsernameModal">
+                </form>
+            </div>
+        </div>
 
-    <form id = "changeProfilePicture" class="center">
-        <input type="text" placeholder="Enter New Picture URL" id="newProfilePicture" name="newProfilePicture" required>
-        <input type="submit" value="Change Profile Picture" id="changeProfilePictureButton">
-    </form>
+        <input type="submit" class="change" value="Change FullName" id="changeFullNameButton">
 
-    <form id = "changePassword" class="center">
-        <input type="text" placeholder="Enter New Password" id="newPassword" name="newPassword" required>
-        <input type="submit" value="Change Password" id="changePasswordButton">
-    </form>
+        <div id="fullNameModal" class="modal">
+            <div class="modal-content">
+                <form id="changeFullNameModal" class="center">
+                    <input type="text" placeholder="Enter Your New Fullname" id="newFullName" name="newFullName" required>
+                    <input type="submit" class="confirm" value="Confirm">
+                    <input type="button" class="cancel" value="Cancel" id="cancelFullNameModal">
+                </form>
+            </div>
+        </div>
+        
+        <input type="submit" class="change" value="Change Profile Picture" id="changeProfilePictureButton">
+
+        <div id="profilePictureModal" class="modal">
+            <div class="modal-content">
+                <form id="changeProfilePictureModal" class="center">
+                    <input type="text" placeholder="Enter The New Profile Picture URL" id="newProfilePicture" name="newProfilePicture" required>
+                    <input type="submit" class="confirm" value="Confirm">
+                    <input type="button" class="cancel" value="Cancel" id="cancelProfilePictureModal">
+                </form>
+            </div>
+        </div>
+
+        <input type="submit" class="change" value="Change Password" id="changePasswordButton">
+
+        <div id="passwordModal" class="modal">
+            <div class="modal-content">
+                <form id="changePasswordModal" class="center">
+                    <input type="text" placeholder="Enter Your New Password" id="newPassword" name="newPassword" required>
+                    <input type="submit" class="confirm" value="Confirm">
+                    <input type="button" class="cancel" value="Cancel" id="cancelPasswordModal">
+                </form>
+            </div>
+        </div>
+
+        <br>
+
+        <label id="message"></label>
 </body>
 
 </html>
