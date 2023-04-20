@@ -1,5 +1,18 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
 
+:root {
+  --dark-background: rgb(77, 77, 77);
+  --light-background: white;
+
+  --foreground-light: black;
+  --tile-background-light: white;
+  --text-color-light: black;
+
+  --foreground-dark: white;
+  --tile-background-dark: grey;
+  --text-color-dark: white;
+}
+
 nav{
     border-style: solid;
     border-color: black;
@@ -22,6 +35,34 @@ a.page_label:hover {
 
 #body{
   padding-top: 7vh;
+}
+
+body.body-light{
+  background-color: var(--light-background);
+  color: white;
+}
+
+body.body-dark{
+  background-color: var(--dark-background);
+  color: white;
+}
+
+p.is-light{
+  color: var(--text-color-light);
+}
+
+p.is-dark{
+  color: var(--text-color-dark);
+}
+
+div.is-light{
+  color: black;
+  background-color: var(--tile-background-light);
+}
+
+div.is-dark{
+  color: white;
+  background-color: var(--tile-background-dark);
 }
 
 #menu_list{
@@ -202,3 +243,6 @@ p#settings_header{
   color: grey;
 }
 
+form{
+  padding-left: 20px;
+}
