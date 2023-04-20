@@ -153,15 +153,3 @@ function createPost() {
 function cancelPost() {
   document.getElementById("postForm").style.display = "none";
 }
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('#banner_image_url').addEventListener('input', () => {
-    document.querySelector('#banner_image').src = document.querySelector('#banner_image_url').value;
-  });
-
-  document.querySelector('#profile_pic_url').addEventListener('input', () => {
-    document.querySelector('#profile_pic').src = document.querySelector('#profile_pic_url').value;
-  });
-});
