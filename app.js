@@ -118,7 +118,7 @@ app.get('/users/:userId', async (req, res) => {
   }
 });
 
-app.get('/chatlog', async (req, res) => {
+app.get('/chatlog', requireLogin, async (req, res) => {
     User.find({})
         .then(() => {
             res.sendFile(__dirname + "/public/chatLog.html");
