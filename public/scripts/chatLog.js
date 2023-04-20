@@ -159,6 +159,9 @@ function send(currentChatlog) {
         },
     });
     
+    const newMessageContainer = document.createElement("div");
+    newMessageContainer.classList.add("messages-container");
+
     const newMessage = document.createElement('div');
     newMessage.classList.add('message-box', 'right');
 
@@ -166,8 +169,9 @@ function send(currentChatlog) {
     messageContent.innerHTML = messageSend;
     newMessage.appendChild(messageContent);
 
-    const messagesContainer = document.querySelector('.messages-container');
-    messagesContainer.appendChild(newMessage);
+    newMessageContainer.appendChild(newMessage);
+    const messagesContainer = document.querySelector('#card-body');
+    messagesContainer.appendChild(newMessageContainer);
 
 
     $('.message-send').val('');
