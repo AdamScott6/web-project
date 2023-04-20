@@ -35,43 +35,46 @@ document.addEventListener('DOMContentLoaded', function() {
                         return res.json();
                     })
                     .then((user) => {
-                        console.log("User retrieved");
+                        if (!(user.accountIsPrivate)){
+                            console.log("User retrieved");
 
-                        let  section = document.createElement('section');
+                            let  section = document.createElement('section');
 
-                        section.classList.add("post", "hidden");
+                            section.classList.add("post", "hidden");
 
-                        let  header = document.createElement('div');
-                        header.classList.add("header");
+                            let  header = document.createElement('div');
+                            header.classList.add("header");
 
-                        let  img = document.createElement("img");
-                        img.src = user.profilePicture;
-                        header.appendChild(img);
+                            let  img = document.createElement("img");
+                            img.src = user.profilePicture;
+                            header.appendChild(img);
 
-                        let  h2 = document.createElement("h2");
-                        h2.textContent = ("@" + user.username);
-                        header.appendChild(h2);
+                            let  h2 = document.createElement("h2");
+                            h2.textContent = ("@" + user.username);
+                            header.appendChild(h2);
 
-                        section.appendChild(header);
+                            section.appendChild(header);
 
-                        let  content = document.createElement("div");
-                        content.classList.add("content");
+                            let  content = document.createElement("div");
+                            content.classList.add("content");
 
-                        let  p = document.createElement("p");
-                        p.textContent = post.content;
-                        content.appendChild(p);
+                            let  p = document.createElement("p");
+                            p.textContent = post.content;
+                            content.appendChild(p);
 
-                        section.appendChild(content);
+                            section.appendChild(content);
 
-                        if (parent) {
-                            number_of_elements++;
+                            if (parent) {
+                                number_of_elements++;
+                                //console.log(number_of_elements)
+                                parent.appendChild(section);
+                                observer.observe(section)
+                            } else {
+                                console.log("Parent element not found.");
+                            };
                             //console.log(number_of_elements)
-                            parent.appendChild(section);
-                            observer.observe(section)
-                        } else {
-                            console.log("Parent element not found.");
-                        };
-                        //console.log(number_of_elements)
+                        }
+                        
                     })
                     .catch(function(error) {
                         console.error('There was a problem with the fetch operation:', error);
