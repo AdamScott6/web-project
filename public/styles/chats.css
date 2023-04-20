@@ -56,6 +56,14 @@ body.body-dark {
     background-color: var(--dark-background);
 }
 
+p.is-light{
+    color: var(--text-color-light);
+}
+
+p.is-dark{
+    color: var(--text-color-dark);
+}
+
 #app{
     height: 100vh
 }

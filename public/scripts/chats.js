@@ -68,6 +68,11 @@ const app = Vue.createApp({
                                 }
                                 $("body").addClass("body-light");
 
+                                if ($("p#messageHeader").attr("class").includes("is-dark")){
+                                    $("p#messageHeader").removeClass("is-dark");
+                                }
+                                $("#messageHeader").addClass("is-light");
+
                                 // if ($("html").attr("class").includes("is-dark")){
                                 //     $("html").removeClass("is-dark");
                                 // }
@@ -78,6 +83,11 @@ const app = Vue.createApp({
                                     $("body").removeClass("body-light");
                                 }
                                 $("body").addClass("body-dark");
+
+                                if ($("p#messageHeader").attr("class").includes("is-light")){
+                                    $("p#messageHeader").removeClass("is-light");
+                                }
+                                $("p#messageHeader").addClass("is-dark");
 
                                 // if ($("html").attr("class").includes("is-light")){
                                 //     $("html").removeClass("is-light");
