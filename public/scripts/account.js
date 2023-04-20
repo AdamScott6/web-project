@@ -230,5 +230,8 @@ function initializeTheme() {
             $("body").removeClass("body-light");
         }
         $("body").addClass("body-dark");
+        document.querySelectorAll('.modal-content').forEach(function(element) {
+            element.style.backgroundColor = '#505050';
+          });
     }
 }
